@@ -1,10 +1,10 @@
-package com.example.loginauthapi;
+package com.etec.backend;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class LoginAuthApiApplicationTests {
+class HeartCareApplicationTests {
 
 	@Test
 	void contextLoads() {

@@ -11,7 +11,7 @@ import lombok.NoArgsConstructor;
 
 
 @Entity
-@Table(name = "user_profiles")
+@Table(name = "tb02_users_profiles")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -20,12 +20,11 @@ public class UserProfile {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String username;
     private String name;
     private String lastName;
     private String dob;
     private String number;
-    private String genero;
+    private String gender;
     private String email;
     private String photo;
 

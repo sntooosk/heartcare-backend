@@ -1,7 +1,8 @@
-package com.example.loginauthapi.repository;
+package com.etec.backend.repository;
 
-import com.example.loginauthapi.domain.user.User;
 import org.springframework.data.jpa.repository.JpaRepository;
+
+import com.etec.backend.domain.user.User;
 
 import java.util.Optional;
 

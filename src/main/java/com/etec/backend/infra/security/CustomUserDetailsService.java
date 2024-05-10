@@ -1,7 +1,7 @@
-package com.example.loginauthapi.infra.security;
+package com.etec.backend.infra.security;
 
-import com.example.loginauthapi.domain.user.User;
-import com.example.loginauthapi.repository.UserRepository;
+import com.etec.backend.domain.user.User;
+import com.etec.backend.repository.UserRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;

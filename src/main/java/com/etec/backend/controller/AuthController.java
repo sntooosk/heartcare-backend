@@ -1,11 +1,11 @@
-package com.example.loginauthapi.controller;
+package com.etec.backend.controller;
 
-import com.example.loginauthapi.domain.user.User;
-import com.example.loginauthapi.dto.LoginRequestDTO;
-import com.example.loginauthapi.dto.RegisterRequestDTO;
-import com.example.loginauthapi.dto.ResponseDTO;
-import com.example.loginauthapi.infra.security.TokenService;
-import com.example.loginauthapi.repository.UserRepository;
+import com.etec.backend.domain.user.User;
+import com.etec.backend.dto.LoginRequestDTO;
+import com.etec.backend.dto.RegisterRequestDTO;
+import com.etec.backend.dto.ResponseDTO;
+import com.etec.backend.infra.security.TokenService;
+import com.etec.backend.repository.UserRepository;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/auth")
+@RequestMapping("api/v1/auth")
 @RequiredArgsConstructor
 public class AuthController {
     private final UserRepository repository;

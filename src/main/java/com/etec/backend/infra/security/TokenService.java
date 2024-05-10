@@ -1,10 +1,11 @@
-package com.example.loginauthapi.infra.security;
+package com.etec.backend.infra.security;
 
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.exceptions.JWTCreationException;
 import com.auth0.jwt.exceptions.JWTVerificationException;
-import com.example.loginauthapi.domain.user.User;
+import com.etec.backend.domain.user.User;
+
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
@@ -22,7 +23,7 @@ public class TokenService {
             Algorithm algorithm = Algorithm.HMAC256(secret);
 
             String token = JWT.create()
-                    .withIssuer("login-auth-api")
+                    .withIssuer("heartcare-backend")
                     .withSubject(user.getEmail())
                     .withExpiresAt(this.generateExpirationDate())
                     .sign(algorithm);
@@ -36,7 +37,7 @@ public class TokenService {
         try {
             Algorithm algorithm = Algorithm.HMAC256(secret);
             return JWT.require(algorithm)
-                    .withIssuer("login-auth-api")
+                    .withIssuer("heartcare-backend")
                     .build()
                     .verify(token)
                     .getSubject();

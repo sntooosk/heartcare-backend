@@ -1,4 +1,4 @@
-package com.example.loginauthapi.infra.security;
+package com.etec.backend.infra.security;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -27,8 +27,11 @@ public class SecurityConfig {
                 .csrf(csrf -> csrf.disable())
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(authorize -> authorize
-                        .requestMatchers(HttpMethod.POST, "/auth/login").permitAll()
-                        .requestMatchers(HttpMethod.POST, "/auth/register").permitAll()
+                        .requestMatchers(HttpMethod.POST, "api/v1/auth/login").permitAll()
+                        .requestMatchers(HttpMethod.POST, "api/v1/auth/register").permitAll()
+                        .requestMatchers(HttpMethod.POST, "api/v1/profile/create").permitAll()
+                        .requestMatchers(HttpMethod.GET, "api/v1/profile/get").permitAll()
+
                         .anyRequest().authenticated())
                 .addFilterBefore(securityFilter, UsernamePasswordAuthenticationFilter.class);
         return http.build();

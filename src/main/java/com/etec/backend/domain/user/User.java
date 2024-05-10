@@ -1,4 +1,4 @@
-package com.example.loginauthapi.domain.user;
+package com.etec.backend.domain.user;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;

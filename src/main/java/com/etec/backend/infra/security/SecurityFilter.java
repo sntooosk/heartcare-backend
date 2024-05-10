@@ -1,7 +1,6 @@
-package com.example.loginauthapi.infra.security;
+package com.etec.backend.infra.security;
 
-import com.example.loginauthapi.domain.user.User;
-import com.example.loginauthapi.repository.UserRepository;
+
 
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
@@ -13,6 +12,9 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
+
+import com.etec.backend.domain.user.User;
+import com.etec.backend.repository.UserRepository;
 
 import java.io.IOException;
 import java.util.Collections;

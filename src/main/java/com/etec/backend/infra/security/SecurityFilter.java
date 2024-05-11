@@ -11,8 +11,8 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
-import com.etec.backend.domain.user.User;
-import com.etec.backend.repository.UserRepository;
+import com.etec.backend.entity.Auth;
+import com.etec.backend.repository.AuthRepository;
 
 import java.io.IOException;
 import java.util.Collections;
@@ -22,7 +22,7 @@ public class SecurityFilter extends OncePerRequestFilter {
     @Autowired
     TokenService tokenService;
     @Autowired
-    UserRepository userRepository ;
+    AuthRepository repository ;
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
@@ -31,9 +31,9 @@ public class SecurityFilter extends OncePerRequestFilter {
         var login = tokenService.validateToken(token);
 
         if (login != null) {
-            User user = this.userRepository.findByEmail(login).orElseThrow(() -> new RuntimeException("User Not Found"));
+            Auth auth = this.repository.findByEmail(login).orElseThrow(() -> new RuntimeException("User Not Found"));
             var authorities = Collections.singletonList(new SimpleGrantedAuthority("ROLE_USER"));
-            var authentication = new UsernamePasswordAuthenticationToken(user, null, authorities);
+            var authentication = new UsernamePasswordAuthenticationToken(auth, null, authorities);
             SecurityContextHolder.getContext().setAuthentication(authentication);
         }
         filterChain.doFilter(request, response);

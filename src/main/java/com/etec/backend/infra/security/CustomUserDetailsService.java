@@ -6,21 +6,21 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Component;
 
-import com.etec.backend.domain.user.User;
-import com.etec.backend.repository.UserRepository;
+import com.etec.backend.entity.Auth;
+import com.etec.backend.repository.AuthRepository;
 
 import java.util.ArrayList;
 
 @Component
 public class CustomUserDetailsService implements UserDetailsService {
     @Autowired
-    private UserRepository repository;
+    private AuthRepository repository;
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        User user = this.repository.findByEmail(username)
+        Auth auth = this.repository.findByEmail(username)
                 .orElseThrow(() -> new UsernameNotFoundException("User not found"));
-        return new org.springframework.security.core.userdetails.User(user.getEmail(), user.getPassword(),
+        return new org.springframework.security.core.userdetails.User(auth.getEmail(), auth.getPassword(),
                 new ArrayList<>());
     }
 }

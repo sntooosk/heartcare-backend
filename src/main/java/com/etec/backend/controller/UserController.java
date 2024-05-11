@@ -16,6 +16,11 @@ public class UserController {
 
     private final UserRepository userRepository;
 
+    @GetMapping
+    public ResponseEntity<String> getUser() {
+        return ResponseEntity.ok("sucesso!");
+    }
+
     @GetMapping("/get/{id}")
     public ResponseEntity<User> getUserById(@PathVariable String id) {
         User user = userRepository.findById(id)

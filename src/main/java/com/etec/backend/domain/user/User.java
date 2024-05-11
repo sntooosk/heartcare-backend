@@ -14,9 +14,31 @@ import lombok.Setter;
 @NoArgsConstructor
 public class User {
     @Id
-    @GeneratedValue(strategy = GenerationType.UUID)
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "tb01_id")
     private String id;
+
+    @Column(name = "tb01_name")
     private String name;
+
+    @Column(name = "tb01_last_name")
+    private String lastName;
+
+    @Column(name = "tb01_dob")
+    private String dob;
+
+    @Column(name = "tb01_number")
+    private String number;
+
+    @Column(name = "tb01_gender")
+    private String gender;
+
+    @Column(name = "tb01_photo")
+    private String photo;
+
+    @Column(name = "tb01_email")
     private String email;
+
+    @Column(name = "tb01_password")
     private String password;
 }

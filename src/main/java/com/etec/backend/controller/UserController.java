@@ -1,9 +1,11 @@
 package com.etec.backend.controller;
 
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import com.etec.backend.domain.user.User;
-import com.etec.backend.service.UserService;
+import com.etec.backend.repository.UserRepository;
 
 import lombok.RequiredArgsConstructor;
 
@@ -12,32 +14,35 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class UserController {
 
-    private final UserService userService;
+    private final UserRepository userRepository;
 
     @GetMapping("/get/{id}")
-    public User getUserById(@PathVariable String id) {
-        return userService.findById(id);
-    }
-
-    @GetMapping("/getByEmail/{email}")
-    public User getUserByEmail(@PathVariable String email) {
-        return userService.findByEmail(email)
-                .orElseThrow(() -> new RuntimeException("Usuário não encontrado com o email: " + email));
+    public ResponseEntity<User> getUserById(@PathVariable String id) {
+        User user = userRepository.findById(id)
+                .orElse(null);
+        if (user != null) {
+            return ResponseEntity.ok(user);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
     }
 
     @PostMapping("/create")
-    public User create(@RequestBody User user) {
-        return userService.create(user);
+    public ResponseEntity<User> create(@RequestBody User user) {
+        User newUser = userRepository.save(user);
+        return ResponseEntity.status(HttpStatus.CREATED).body(newUser);
     }
 
     @PutMapping("/update/{id}")
-    public User update(@PathVariable String id, @RequestBody User user) {
+    public ResponseEntity<User> update(@PathVariable String id, @RequestBody User user) {
         user.setId(id);
-        return userService.update(user);
+        User updatedUser = userRepository.save(user);
+        return ResponseEntity.ok(updatedUser);
     }
 
     @DeleteMapping("/delete/{id}")
-    public void delete(@PathVariable String id) {
-        userService.delete(id);
+    public ResponseEntity<?> delete(@PathVariable String id) {
+        userRepository.deleteById(id);
+        return ResponseEntity.noContent().build();
     }
 }

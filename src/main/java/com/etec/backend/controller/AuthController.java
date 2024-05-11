@@ -5,7 +5,7 @@ import com.etec.backend.dto.LoginRequestDTO;
 import com.etec.backend.dto.RegisterRequestDTO;
 import com.etec.backend.dto.ResponseDTO;
 import com.etec.backend.infra.security.TokenService;
-import com.etec.backend.service.UserService;
+import com.etec.backend.repository.UserRepository;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -19,13 +19,13 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("api/v1/auth")
 @RequiredArgsConstructor
 public class AuthController {
-    private final UserService userService;
+    private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
     private final TokenService tokenService;
 
     @PostMapping("/login")
     public ResponseEntity login(@RequestBody LoginRequestDTO body) {
-        User user = userService.findByEmail(body.email())
+        User user = userRepository.findByEmail(body.email())
                 .orElseThrow(() -> new RuntimeException("Usuário não encontrado"));
         if (passwordEncoder.matches(body.email(), user.getPassword())) {
             String token = tokenService.generateToken(user);
@@ -36,7 +36,7 @@ public class AuthController {
 
     @PostMapping("/register")
     public ResponseEntity register(@RequestBody RegisterRequestDTO body) {
-        if (userService.findByEmail(body.email()).isPresent()) {
+        if (userRepository.findByEmail(body.email()).isPresent()) {
             return ResponseEntity.badRequest().build();
         }
 
@@ -44,7 +44,7 @@ public class AuthController {
         newUser.setPassword(passwordEncoder.encode(body.password()));
         newUser.setEmail(body.email());
         newUser.setName(body.name());
-        userService.create(newUser);
+        userRepository.save(newUser);
 
         String token = tokenService.generateToken(newUser);
         return ResponseEntity.ok(new ResponseDTO(newUser.getName(), newUser.getEmail(), token));

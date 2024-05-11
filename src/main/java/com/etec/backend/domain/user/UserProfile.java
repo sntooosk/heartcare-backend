@@ -19,7 +19,8 @@ public class UserProfile {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
+    private Long id_user;
+    
     private String name;
     private String lastName;
     private String dob;

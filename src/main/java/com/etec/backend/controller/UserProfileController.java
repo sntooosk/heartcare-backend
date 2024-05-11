@@ -6,7 +6,6 @@ import com.etec.backend.domain.user.UserProfile;
 import com.etec.backend.service.UserProfileService;
 
 import lombok.RequiredArgsConstructor;
-import java.util.List;
 
 @RestController
 @RequestMapping("api/v1/profile")
@@ -15,10 +14,11 @@ public class UserProfileController {
 
     private final UserProfileService userProfileService;
 
-    @GetMapping("/get")
-    public List<UserProfile> listAll() {
-        return userProfileService.listAll();
+    @GetMapping("/get/{id}")
+    public UserProfile getUserProfileById(@PathVariable Long id) {
+        return userProfileService.findById(id);
     }
+
 
     @PostMapping("/create")
     public UserProfile create(@RequestBody UserProfile userProfile) {

@@ -7,6 +7,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import com.etec.backend.entity.Auth;
 
 
-public interface AuthRepository extends JpaRepository<Auth, String> {
+public interface AuthRepository extends JpaRepository<Auth, Long> {
     Optional<Auth> findByEmail(String email);
 }

@@ -1,4 +1,5 @@
-<h1 align="center" style="font-weight: bold;">Backend Java Spring com JWT UserAuth 🔐</h1>
+
+<h1 align="center">Backend Heartcare Java Spring com JWT HeartCare UserAuth 🔐</h1>
 
 [![java-spring](https://img.shields.io/badge/java-spring-brightgreen?style=for-the-badge&logo=spring)](https://spring.io/)
 [![jwt](https://img.shields.io/badge/jwt-JSON%20Web%20Token-green?style=for-the-badge)](https://jwt.io/)
@@ -53,14 +54,14 @@ git clone https://github.com/seu-usuario/backend-java-spring-jwt.git
 ### Registro de Usuário (Sign Up)
 
 ```
-POST /api/auth/signup
+POST /api/v1/auth/register
 ```
 
 Endpoint para registro de um novo usuário.
 
 #### Parâmetros de Requisição
 
-- `username`: Nome de usuário
+- `name`: Nome de usuário
 - `email`: Endereço de e-mail
 - `password`: Senha do usuário
 
@@ -68,9 +69,22 @@ Endpoint para registro de um novo usuário.
 
 ```json
 {
-  "username": "example_user",
-  "email": "user@example.com",
+  "name": "creusa",
+  "email": "creusasantos88@etec.sp.gov.br",
   "password": "password123"
+}
+```
+### Update User
+
+```json
+{
+  "name": "creusa",
+  "lastName": "aparecida do rosario",
+  "dob": "1967-06-02",
+  "gender": "Male",
+  "auth": {
+    "id": 6
+  }
 }
 ```
 
@@ -81,21 +95,21 @@ Status: `201 Created`
 ### Autenticação de Usuário (Login)
 
 ```
-POST /api/auth/signin
+POST /api/v1/auth/login
 ```
 
 Endpoint para autenticação de usuário.
 
 #### Parâmetros de Requisição
 
-- `username`: Nome de usuário ou e-mail
-- `password`: Senha do usuário
+- `email`: e-mail
+- `password`: Senha
 
 #### Exemplo de Requisição
 
 ```json
 {
-  "username": "example_user",
+  "email": "example_user",
   "password": "password123"
 }
 ```
@@ -106,7 +120,7 @@ Status: `200 OK`
 
 ```json
 {
-  "accessToken": "seu_token_jwt"
+  "token": "seu_token_jwt"
 }
 ```
 
@@ -120,7 +134,7 @@ Exemplo de cabeçalho:
 Authorization: Bearer seu_token_jwt
 ```
 
-<h2 id="contribute">📫 Contribuição</h2>
+<h2 id="contribution">📫 Contribuição</h2>
 
 1. `git clone https://github.com/seu-usuario/editor-texto.git`
 2. `git checkout -b feature/NOME`

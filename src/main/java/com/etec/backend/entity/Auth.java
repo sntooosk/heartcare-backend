@@ -8,23 +8,23 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
-@Table(name = "tb00_auth")
+@Table(name = "tb01_auth")
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
 public class Auth {
     @Id
-    @GeneratedValue(strategy = GenerationType.UUID)
-    @Column(name = "tb00_id")
-    private String id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "tb01_id")
+    private Long id;
 
-    @Column(name = "tb00_name")
-    private String name;
-
-    @Column(name = "tb00_email")
+    @Column(name = "tb01_email")
     private String email;
 
-    @Column(name = "tb00_password")
+    @Column(name = "tb01_password")
     private String password;
+
+    @OneToOne(mappedBy = "auth")
+    private User user;
 }

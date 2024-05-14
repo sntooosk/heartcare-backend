@@ -12,8 +12,10 @@ import com.etec.backend.dto.LoginRequestDTO;
 import com.etec.backend.dto.RegisterRequestDTO;
 import com.etec.backend.dto.ResponseDTO;
 import com.etec.backend.entity.Auth;
+import com.etec.backend.entity.User;
 import com.etec.backend.infra.security.TokenService;
 import com.etec.backend.repository.AuthRepository;
+import com.etec.backend.repository.UserRepository;
 
 import java.util.Optional;
 
@@ -21,34 +23,42 @@ import java.util.Optional;
 @RequestMapping("api/v1/auth")
 @RequiredArgsConstructor
 public class AuthController {
-    private final AuthRepository repository;
+    private final AuthRepository authRepository;
+    private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
     private final TokenService tokenService;
 
     @PostMapping("/login")
-    public ResponseEntity login(@RequestBody LoginRequestDTO body) {
-        Auth auth = this.repository.findByEmail(body.email()).orElseThrow(() -> new RuntimeException("User not found"));
-        if (passwordEncoder.matches(body.password(), auth.getPassword())) {
-            String token = this.tokenService.generateToken(auth);
-            return ResponseEntity.ok(new ResponseDTO(auth.getName(), auth.getEmail(), token));
+    public ResponseEntity<ResponseDTO> login(@RequestBody LoginRequestDTO body) {
+        Optional<Auth> authOptional = authRepository.findByEmail(body.email());
+        if (authOptional.isPresent()) {
+            Auth auth = authOptional.get();
+            if (passwordEncoder.matches(body.password(), auth.getPassword())) {
+                String token = tokenService.generateToken(auth);
+                return ResponseEntity.ok(new ResponseDTO(auth.getUser().getId(),auth.getUser().getName(), auth.getEmail(), token));
+            }
         }
         return ResponseEntity.badRequest().build();
     }
 
     @PostMapping("/register")
-    public ResponseEntity register(@RequestBody RegisterRequestDTO body) {
-        Optional<Auth> auth = this.repository.findByEmail(body.email());
-
-        if (auth.isEmpty()) {
-            Auth newAuth = new Auth();
-            newAuth.setPassword(passwordEncoder.encode(body.password()));
-            newAuth.setEmail(body.email());
-            newAuth.setName(body.name());
-            this.repository.save(newAuth);
-
-            String token = this.tokenService.generateToken(newAuth);
-            return ResponseEntity.ok(new ResponseDTO(newAuth.getName(), newAuth.getEmail(), token));
+    public ResponseEntity<ResponseDTO> register(@RequestBody RegisterRequestDTO body) {
+        Optional<Auth> existingAuthOptional = authRepository.findByEmail(body.email());
+        if (existingAuthOptional.isPresent()) {
+            return ResponseEntity.badRequest().build(); // Email already registered
         }
-        return ResponseEntity.badRequest().build();
+        
+        Auth newAuth = new Auth();
+        newAuth.setEmail(body.email());
+        newAuth.setPassword(passwordEncoder.encode(body.password()));
+        authRepository.save(newAuth);
+
+        User newUser = new User();
+        newUser.setName(body.name());
+        newUser.setAuth(newAuth);
+        userRepository.save(newUser);
+
+        String token = tokenService.generateToken(newAuth);
+        return ResponseEntity.ok(new ResponseDTO( newUser.getId(), newUser.getName(), newAuth.getEmail(), token));
     }
 }

@@ -24,9 +24,6 @@ public class Auth {
     @Column(name = "tb01_password")
     private String password;
 
-    @Column(name = "tb01_token")
-    private String token;
-
     @OneToOne(mappedBy = "auth")
     private User user;
 }

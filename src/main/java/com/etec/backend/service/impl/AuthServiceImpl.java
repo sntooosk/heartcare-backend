@@ -32,7 +32,6 @@ public class AuthServiceImpl implements AuthService {
             Auth auth = authOptional.get();
             if (passwordEncoder.matches(body.password(), auth.getPassword())) {
                 String token = tokenService.generateToken(auth);
-                auth.setToken(token);
                 return new AuthResponseDTO(auth.getId(), auth.getUser().getName() ,auth.getEmail(), token);
             }
         }
@@ -50,7 +49,6 @@ public class AuthServiceImpl implements AuthService {
         newAuth.setEmail(body.email());
         newAuth.setPassword(passwordEncoder.encode(body.password()));
         String token = tokenService.generateToken(newAuth);
-        newAuth.setToken(token);
         authRepository.save(newAuth);
 
         User newUser = new User();

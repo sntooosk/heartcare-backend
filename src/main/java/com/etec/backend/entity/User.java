@@ -31,8 +31,9 @@ public class User{
     @Column(name = "tb00_gender")
     private String gender;
 
-    @Column(name = "tb00_photo")
-    private String photo;
+    @Lob
+    @Column(name = "tb00_photo", columnDefinition = "BYTEA")
+    private Byte[] photo;
 
     @OneToOne
     @JoinColumn(name = "tb00_auth_id")

@@ -1,5 +1,4 @@
-
-<h1 align="center">Backend Heartcare Java Spring com JWT HeartCare UserAuth 🔐</h1>
+<h1 align="center">Backend Heartcare com Java Spring e JWT 🔐</h1>
 
 [![java-spring](https://img.shields.io/badge/java-spring-brightgreen?style=for-the-badge&logo=spring)](https://spring.io/)
 [![jwt](https://img.shields.io/badge/jwt-JSON%20Web%20Token-green?style=for-the-badge)](https://jwt.io/)
@@ -74,7 +73,8 @@ Endpoint para registro de um novo usuário.
   "password": "password123"
 }
 ```
-### Update User
+
+### Atualização de Usuário
 
 ```json
 {
@@ -86,6 +86,54 @@ Endpoint para registro de um novo usuário.
     "id": 6
   }
 }
+```
+
+### Registro de Medições
+
+```json
+{
+  "diastolic": "20",
+  "systolic": "30",
+  "pulse": "20",
+  "date": "11/09/2006",
+  "user": {
+    "id": 1
+  }
+}
+```
+
+### Consultar Medições por UserID
+
+```
+GET localhost:8080/api/v1/pressure?userId=1
+```
+
+#### Exemplo de Resposta
+
+```json
+[
+  {
+    "id": 1,
+    "diastolica": "20",
+    "sistolica": null,
+    "pulse": "20",
+    "date": "11/09/2006"
+  },
+  {
+    "id": 2,
+    "diastolica": "20",
+    "sistolica": null,
+    "pulse": "20",
+    "date": "11/09/2006"
+  },
+  {
+    "id": 3,
+    "diastolica": "20",
+    "sistolica": "30",
+    "pulse": "20",
+    "date": "11/09/2006"
+  }
+]
 ```
 
 #### Resposta de Sucesso
@@ -102,7 +150,7 @@ Endpoint para autenticação de usuário.
 
 #### Parâmetros de Requisição
 
-- `email`: e-mail
+- `email`: Endereço de e-mail
 - `password`: Senha
 
 #### Exemplo de Requisição

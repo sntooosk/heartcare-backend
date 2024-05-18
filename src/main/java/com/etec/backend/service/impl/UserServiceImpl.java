@@ -22,7 +22,7 @@ public class UserServiceImpl implements UserService {
         List<User> users = userRepository.findAll();
         return users.stream()
                 .map(user -> new UserResponseDTO(user.getId(), user.getName(), user.getLastName(), user.getDob(),
-                        user.getGender()))
+                        user.getGender(), user.getPhoto()))
                 .collect(Collectors.toList());
     }
 
@@ -30,7 +30,7 @@ public class UserServiceImpl implements UserService {
         Optional<User> userOptional = userRepository.findById(id);
         return userOptional
                 .map(user -> new UserResponseDTO(user.getId(), user.getName(), user.getLastName(), user.getDob(),
-                        user.getGender()))
+                        user.getGender(),user.getPhoto()))
                 .orElse(null);
     }
 
@@ -41,6 +41,6 @@ public class UserServiceImpl implements UserService {
         user.setId(id);
         User updatedUser = userRepository.save(user);
         return new UserResponseDTO(updatedUser.getId(), updatedUser.getName(), updatedUser.getLastName(),
-                updatedUser.getDob(), updatedUser.getGender());
+                updatedUser.getDob(), updatedUser.getGender(), updatedUser.getPhoto());
     }
 }

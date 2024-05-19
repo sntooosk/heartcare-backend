@@ -1,6 +1,7 @@
 package com.etec.backend.service.impl;
 
 import com.etec.backend.dto.AuthResponseDTO;
+import com.etec.backend.dto.ErrorResponseDTO;
 import com.etec.backend.dto.LoginRequestDTO;
 import com.etec.backend.dto.RegisterRequestDTO;
 import com.etec.backend.entity.Auth;
@@ -26,23 +27,25 @@ public class AuthServiceImpl implements AuthService {
     private final TokenService tokenService;
 
     @Override
-    public AuthResponseDTO login(LoginRequestDTO body) {
+    public Object login(LoginRequestDTO body) {
         Optional<Auth> authOptional = authRepository.findByEmail(body.email());
         if (authOptional.isPresent()) {
             Auth auth = authOptional.get();
             if (passwordEncoder.matches(body.password(), auth.getPassword())) {
                 String token = tokenService.generateToken(auth);
-                return new AuthResponseDTO(auth.getId(), auth.getUser().getName() ,auth.getEmail(), token);
+                return new AuthResponseDTO(auth.getId(), auth.getUser().getName(), auth.getEmail(), token);
+            } else {
+                return new ErrorResponseDTO("Senha incorreta.");
             }
         }
-        return null;
+        return new ErrorResponseDTO("E-mail não encontrado.");
     }
 
     @Override
-    public AuthResponseDTO register(RegisterRequestDTO body) {
+    public Object register(RegisterRequestDTO body) {
         Optional<Auth> existingAuthOptional = authRepository.findByEmail(body.email());
         if (existingAuthOptional.isPresent()) {
-            return null;
+            return new ErrorResponseDTO("E-mail Ja em Uso.");
         }
 
         Auth newAuth = new Auth();
@@ -55,6 +58,6 @@ public class AuthServiceImpl implements AuthService {
         newUser.setName(body.name());
         newUser.setAuth(newAuth);
         userRepository.save(newUser);
-        return new AuthResponseDTO(newAuth.getId(),newUser.getName(), newAuth.getEmail(), token);
+        return new AuthResponseDTO(newAuth.getId(), newUser.getName(), newAuth.getEmail(), token);
     }
 }

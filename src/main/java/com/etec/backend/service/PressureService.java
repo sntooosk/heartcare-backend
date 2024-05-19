@@ -6,7 +6,7 @@ import com.etec.backend.entity.Pressure;
 import java.util.List;
 
 public interface PressureService {
-    List<PressureResponseDTO> list();
+    
     List<PressureResponseDTO> findByUserId(Long userId);
     PressureResponseDTO create(Pressure pressure);
     PressureResponseDTO update(Long id, Pressure pressure);

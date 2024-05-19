@@ -18,10 +18,6 @@ public class PressureController {
 
     private final PressureService pressureService;
 
-    @GetMapping
-    public List<PressureResponseDTO> list() {
-        return pressureService.list();
-    }
 
     @GetMapping("/")
     public List<PressureResponseDTO> findByUserId(@Param("userId") Long userId) {

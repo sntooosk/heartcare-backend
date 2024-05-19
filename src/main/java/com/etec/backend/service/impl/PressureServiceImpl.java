@@ -27,7 +27,7 @@ public class PressureServiceImpl implements PressureService {
     }
 
     @Override
-    public List<PressureResponseDTO> findbyUserId(Long userId) {
+    public List<PressureResponseDTO> findByUserId(Long userId) {
         List<Pressure> pressures = pressureRepository.findByUserId(userId);
         return pressures.stream()
                 .map(pressure -> new PressureResponseDTO(pressure.getId(), pressure.getDiastolic(), pressure.getSystolic(), pressure.getPulse(), pressure.getDate()))

@@ -1,9 +1,9 @@
 package com.etec.backend.service.impl;
 
 import com.etec.backend.dto.AuthResponseDTO;
-import com.etec.backend.dto.ErrorResponseDTO;
 import com.etec.backend.dto.LoginRequestDTO;
 import com.etec.backend.dto.RegisterRequestDTO;
+import com.etec.backend.dto.ResponseDTO;
 import com.etec.backend.entity.Auth;
 import com.etec.backend.entity.User;
 import com.etec.backend.infra.security.TokenService;
@@ -35,17 +35,17 @@ public class AuthServiceImpl implements AuthService {
                 String token = tokenService.generateToken(auth);
                 return new AuthResponseDTO(auth.getId(), auth.getUser().getName(), auth.getEmail(), token);
             } else {
-                return new ErrorResponseDTO("Senha incorreta.");
+                return new ResponseDTO("Senha incorreta.");
             }
         }
-        return new ErrorResponseDTO("E-mail não encontrado.");
+        return new ResponseDTO("E-mail não encontrado.");
     }
 
     @Override
     public Object register(RegisterRequestDTO body) {
         Optional<Auth> existingAuthOptional = authRepository.findByEmail(body.email());
         if (existingAuthOptional.isPresent()) {
-            return new ErrorResponseDTO("E-mail já em uso.");
+            return new ResponseDTO("E-mail já em uso.");
         }
 
         Auth newAuth = new Auth();

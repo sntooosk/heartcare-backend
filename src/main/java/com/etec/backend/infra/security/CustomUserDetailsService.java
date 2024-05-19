@@ -4,23 +4,27 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import com.etec.backend.entity.Auth;
 import com.etec.backend.repository.AuthRepository;
 
-import java.util.ArrayList;
+import java.util.Collections;
 
-@Component
+@Service
 public class CustomUserDetailsService implements UserDetailsService {
+
+    private final AuthRepository repository;
+
     @Autowired
-    private AuthRepository repository;
+    public CustomUserDetailsService(AuthRepository repository) {
+        this.repository = repository;
+    }
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        Auth auth = this.repository.findByEmail(username)
+        Auth auth = repository.findByEmail(username)
                 .orElseThrow(() -> new UsernameNotFoundException("User not found"));
-        return new org.springframework.security.core.userdetails.User(auth.getEmail(), auth.getPassword(),
-                new ArrayList<>());
+        return new org.springframework.security.core.userdetails.User(auth.getEmail(), auth.getPassword(), Collections.emptyList());
     }
 }

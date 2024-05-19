@@ -25,17 +25,17 @@ public class PressureController {
     }
 
     @PostMapping("/")
-    public PressureResponseDTO create(@RequestBody Pressure pressure) {
+    public Object create(@RequestBody Pressure pressure) {
         return pressureService.create(pressure);
     }
 
     @DeleteMapping("/{id}")
-    public String delete(@PathVariable Long id) {
+    public Object delete(@PathVariable Long id) {
         return pressureService.delete(id);
     }
 
     @PutMapping("/{id}")
-    public PressureResponseDTO update(@PathVariable Long id, @RequestBody Pressure pressure) {
+    public Object update(@PathVariable Long id, @RequestBody Pressure pressure) {
         return pressureService.update(id, pressure);
     }
 }

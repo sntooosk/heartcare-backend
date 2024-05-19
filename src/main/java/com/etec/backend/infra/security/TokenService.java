@@ -9,10 +9,6 @@ import com.etec.backend.entity.Auth;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
-import java.time.Instant;
-import java.time.LocalDateTime;
-import java.time.ZoneOffset;
-
 @Service
 public class TokenService {
     @Value("${api.security.token.secret}")
@@ -25,7 +21,6 @@ public class TokenService {
             String token = JWT.create()
                     .withIssuer("heartcare-backend")
                     .withSubject(auth.getEmail())
-                    .withExpiresAt(this.generateExpirationDate())
                     .sign(algorithm);
             return token;
         } catch (JWTCreationException exception) {
@@ -44,9 +39,5 @@ public class TokenService {
         } catch (JWTVerificationException exception) {
             return null;
         }
-    }
-
-    private Instant generateExpirationDate() {
-        return LocalDateTime.now().plusHours(2).toInstant(ZoneOffset.of("-03:00"));
     }
 }

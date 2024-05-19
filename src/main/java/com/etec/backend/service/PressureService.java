@@ -8,7 +8,7 @@ import java.util.List;
 public interface PressureService {
     
     List<PressureResponseDTO> findByUserId(Long userId);
-    PressureResponseDTO create(Pressure pressure);
-    PressureResponseDTO update(Long id, Pressure pressure);
-    String delete(Long id);
+    Object create(Pressure pressure);
+    Object update(Long id, Pressure pressure);
+    Object delete(Long id);
 }

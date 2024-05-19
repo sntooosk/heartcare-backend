@@ -45,7 +45,7 @@ public class AuthServiceImpl implements AuthService {
     public Object register(RegisterRequestDTO body) {
         Optional<Auth> existingAuthOptional = authRepository.findByEmail(body.email());
         if (existingAuthOptional.isPresent()) {
-            return new ErrorResponseDTO("E-mail Ja em Uso.");
+            return new ErrorResponseDTO("E-mail já em uso.");
         }
 
         Auth newAuth = new Auth();

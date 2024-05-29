@@ -18,7 +18,7 @@ public class Auth {
     @Column(name = "tb01_id")
     private Long id;
 
-    @Column(name = "tb01_email")
+    @Column(name = "tb01_email", unique = true)
     private String email;
 
     @Column(name = "tb01_password")

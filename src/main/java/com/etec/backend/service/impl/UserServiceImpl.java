@@ -20,7 +20,7 @@ public class UserServiceImpl implements UserService {
     public Object listId(Long id) {
         Optional<User> userOptional = userRepository.findById(id);
         return userOptional
-                .map(user -> new UserResponseDTO(user.getId(), user.getName(), user.getLastName(), user.getDob(),
+                .map(user -> new UserResponseDTO(user.getId(), user.getName(), user.getLastname(), user.getDob(),
                         user.getGender(), user.getPhoto()))
                 .orElse(null);
     }
@@ -32,7 +32,7 @@ public class UserServiceImpl implements UserService {
         }
         user.setId(id);
         User updatedUser = userRepository.save(user);
-        return new UserResponseDTO(updatedUser.getId(), updatedUser.getName(), updatedUser.getLastName(),
+        return new UserResponseDTO(updatedUser.getId(), updatedUser.getName(), updatedUser.getLastname(),
                 updatedUser.getDob(), updatedUser.getGender(), updatedUser.getPhoto());
     }
 }

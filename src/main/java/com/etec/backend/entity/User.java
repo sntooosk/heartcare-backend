@@ -23,7 +23,7 @@ public class User{
     private String name;
 
     @Column(name = "tb00_lastname")
-    private String lastName;
+    private String lastname;
 
     @Column(name = "tb00_dob")
     private String dob;

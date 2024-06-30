@@ -2,7 +2,6 @@ package com.etec.backend.controller;
 
 import com.etec.backend.dto.PressureResponseDTO;
 import com.etec.backend.entity.Pressure;
-import com.etec.backend.entity.User;
 import com.etec.backend.service.PressureService;
 import lombok.RequiredArgsConstructor;
 

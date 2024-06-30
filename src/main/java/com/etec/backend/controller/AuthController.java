@@ -2,7 +2,6 @@ package com.etec.backend.controller;
 
 import com.etec.backend.dto.LoginRequestDTO;
 import com.etec.backend.dto.RegisterRequestDTO;
-import com.etec.backend.dto.AuthResponseDTO;
 import com.etec.backend.service.AuthService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.PostMapping;

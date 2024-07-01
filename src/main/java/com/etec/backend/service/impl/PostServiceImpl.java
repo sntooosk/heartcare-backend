@@ -1,14 +1,10 @@
 package com.etec.backend.service.impl;
 
 import com.etec.backend.dto.PostResponseDTO;
-import com.etec.backend.dto.PressureResponseDTO;
 import com.etec.backend.dto.ResponseDTO;
 import com.etec.backend.entity.Post;
-import com.etec.backend.entity.Pressure;
 import com.etec.backend.repository.PostRepository;
-import com.etec.backend.repository.PressureRepository;
 import com.etec.backend.service.PostService;
-import com.etec.backend.service.PressureService;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -22,7 +18,14 @@ public class PostServiceImpl implements PostService {
 
     private final PostRepository postRepository;
 
-   
+    @Override
+    public List<PostResponseDTO> getAll() {
+        List<Post> posts = postRepository.findAll();
+        return posts.stream()
+                .map(post -> new PostResponseDTO(post.getTitle(), post.getComment()))
+                .collect(Collectors.toList());
+    }
+
     @Override
     public Object create(Post post) {
         Post savedPost = postRepository.save(post);
@@ -36,7 +39,7 @@ public class PostServiceImpl implements PostService {
         }
         post.setId(id);
         Post updatedPost = postRepository.save(post);
-        return new PostResponseDTO(updatedPost.getTitle(),updatedPost.getComment());
+        return new PostResponseDTO(updatedPost.getTitle(), updatedPost.getComment());
     }
 
     @Override

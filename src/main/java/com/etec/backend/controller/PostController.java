@@ -1,10 +1,12 @@
 package com.etec.backend.controller;
 
+import com.etec.backend.dto.PostResponseDTO;
 import com.etec.backend.entity.Post;
 import com.etec.backend.service.PostService;
 import lombok.RequiredArgsConstructor;
-
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/v1/posts")
@@ -12,6 +14,11 @@ import org.springframework.web.bind.annotation.*;
 public class PostController {
 
     private final PostService postService;
+
+    @GetMapping("/")
+    public List<PostResponseDTO> getAll() {
+        return postService.getAll();
+    }
 
     @PostMapping("/")
     public Object create(@RequestBody Post post) {

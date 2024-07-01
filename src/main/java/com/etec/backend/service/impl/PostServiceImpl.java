@@ -19,10 +19,10 @@ public class PostServiceImpl implements PostService {
     private final PostRepository postRepository;
 
     @Override
-    public List<PostResponseDTO> getAll() {
+    public List<Post> getAll() {
         List<Post> posts = postRepository.findAll();
         return posts.stream()
-                .map(post -> new PostResponseDTO(post.getTitle(), post.getComment()))
+                .map(post -> new Post(post.getId(), post.getTitle(), post.getComment()))
                 .collect(Collectors.toList());
     }
 

@@ -16,7 +16,7 @@ public class PostController {
     private final PostService postService;
 
     @GetMapping("/")
-    public List<PostResponseDTO> getAll() {
+    public List<Post> getAll() {
         return postService.getAll();
     }
 

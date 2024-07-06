@@ -5,28 +5,16 @@ import com.etec.backend.dto.UserResponseDTO;
 import com.etec.backend.entity.User;
 import com.etec.backend.repository.UserRepository;
 import com.etec.backend.service.UserService;
-
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
 public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
-
-    @Override
-    public List<UserResponseDTO> getAll() {
-        List<User> users = userRepository.findAll();
-        return users.stream()
-                .map(user -> new UserResponseDTO(user.getId(), user.getName(), user.getLastname(), user.getDob(),
-                        user.getGender(), user.getPhoto()))
-                .collect(Collectors.toList());
-    }
 
     @Override
     public Object listId(Long id) {
@@ -38,10 +26,11 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public UserResponseDTO update(Long id, User user) {
+    public Object update(Long id, User user) {
         if (!userRepository.existsById(id)) {
-            return null; // Handle the case where user with given id does not exist
+            return new ResponseDTO("O ID especificado não existe: " + id);
         }
+        
         user.setId(id);
         User updatedUser = userRepository.save(user);
         return new UserResponseDTO(updatedUser.getId(), updatedUser.getName(), updatedUser.getLastname(),
@@ -49,11 +38,11 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public ResponseDTO delete(Long id) {
+    public Object delete(Long id) {
         if (!userRepository.existsById(id)) {
-            return new ResponseDTO("Não existe esse ID.");
+            return new ResponseDTO("O ID especificado não existe: " + id);
         }
         userRepository.deleteById(id);
-        return new ResponseDTO("Removido com sucesso.");
+        return new ResponseDTO("O ID especificado foi removido com sucesso: " + id);
     }
 }

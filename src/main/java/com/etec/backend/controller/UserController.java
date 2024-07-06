@@ -16,10 +16,6 @@ public class UserController {
 
     private final UserService userService;
 
-    @GetMapping("/")
-    public List<UserResponseDTO> getAll() {
-        return userService.getAll();
-    }
 
     @GetMapping("/{id}")
     public Object listId(@PathVariable Long id) {

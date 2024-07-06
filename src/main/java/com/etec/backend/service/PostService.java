@@ -1,6 +1,5 @@
 package com.etec.backend.service;
 
-import com.etec.backend.dto.PostResponseDTO;
 import com.etec.backend.entity.Post;
 
 import java.util.List;

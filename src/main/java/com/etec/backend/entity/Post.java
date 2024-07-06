@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
-@Table(name = "tb04_posts")
+@Table(name = "tb03_posts")
 @Getter
 @Setter
 @AllArgsConstructor
@@ -15,13 +15,13 @@ import lombok.Setter;
 public class Post {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "tb04_id")
+    @Column(name = "tb03_id")
     private Long id;
 
-    @Column(name = "tb04_title")
+    @Column(name = "tb03_title")
     private String title;
 
-    @Column(name = "tb04_comment")
+    @Column(name = "tb03_comment")
     private String comment;
 
 }

@@ -35,7 +35,7 @@ public class PostServiceImpl implements PostService {
     @Override
     public Object update(Long id, Post post) {
         if (!postRepository.existsById(id)) {
-            return new ResponseDTO("Não existe esse ID.");
+            return new ResponseDTO("O ID especificado não existe: " + id);
         }
         post.setId(id);
         Post updatedPost = postRepository.save(post);
@@ -45,9 +45,9 @@ public class PostServiceImpl implements PostService {
     @Override
     public Object delete(Long id) {
         if (!postRepository.existsById(id)) {
-            return new ResponseDTO("Não existe esse ID.");
+            return new ResponseDTO("O ID especificado não existe: " + id);
         }
         postRepository.deleteById(id);
-        return new ResponseDTO("Removido com sucesso.");
+        return new ResponseDTO("O ID especificado foi removido com sucesso: " + id);
     }
 }

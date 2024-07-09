@@ -18,7 +18,7 @@ public class EmailService {
     public void sendSimpleMessage(EmailRequestDTO EmailRequestDTO) {
         SimpleMailMessage message = new SimpleMailMessage();
         message.setTo(EmailRequestDTO.to());
-        message.setFrom("Juliano.santos88@icloud.com");
+        message.setFrom(EmailRequestDTO.from());
         message.setSubject(EmailRequestDTO.subject());
         message.setText(EmailRequestDTO.text());
 

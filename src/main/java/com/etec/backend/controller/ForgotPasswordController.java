@@ -40,6 +40,7 @@ public class ForgotPasswordController {
         Long otp = otpGenerator();
         EmailRequestDTO emailRequestDTO = EmailRequestDTO.builder()
                 .to(email)
+                .from(email)
                 .text("Este é o OTP para sua solicitação de redefinição de senha: " + otp)
                 .subject("OTP para solicitação de redefinição de senha")
                 .build();

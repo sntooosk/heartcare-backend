@@ -1,5 +1,6 @@
 package com.etec.infra.security;
 
+
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
@@ -46,12 +47,12 @@ public class JwtService {
         return Keys.hmacShaKeyFor(keyBytes);
     }
 
-    // Gera um token usando detalhes do usuário
+    // Gera um token sem data de expiração usando detalhes do usuário
     public String generateToken(UserDetails userDetails) {
         return generateToken(new HashMap<>(), userDetails);
     }
 
-    // Gera um token usando a classe utilitária Jwt e retorna o token como String
+    // Gera um token sem data de expiração usando a classe utilitária Jwt e retorna o token como String
     public String generateToken(
             Map<String, Object> extraClaims,
             UserDetails userDetails
@@ -61,7 +62,7 @@ public class JwtService {
                 .setClaims(extraClaims)
                 .setSubject(userDetails.getUsername())
                 .setIssuedAt(new Date(System.currentTimeMillis()))
-                .setExpiration(new Date(System.currentTimeMillis() + 25 * 1000))
+                // Removendo a linha que define a expiração
                 .signWith(getSignInKey(), SignatureAlgorithm.HS256)
                 .compact();
     }

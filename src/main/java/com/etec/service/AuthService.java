@@ -7,7 +7,6 @@ import com.etec.entities.User;
 import com.etec.entities.UserAccount;
 import com.etec.entities.UserRole;
 import com.etec.infra.security.JwtService;
-import com.etec.infra.security.RefreshTokenService;
 import com.etec.repositories.UserAccountRepository;
 import com.etec.repositories.UserRepository;
 
@@ -26,7 +25,6 @@ public class AuthService {
         private final UserRepository userRepository;
         private final UserAccountRepository userAccountRepository;
         private final JwtService jwtService;
-        private final RefreshTokenService refreshTokenService;
         private final AuthenticationManager authenticationManager;
 
         public AuthResponse register(RegisterRequest registerRequest) {
@@ -44,12 +42,10 @@ public class AuthService {
                 User savedUser = userRepository.save(user);
                 userAccountRepository.save(userAccount);
                 var accessToken = jwtService.generateToken(savedUser);
-                var refreshToken = refreshTokenService.createRefreshToken(savedUser.getEmail());
 
                 return AuthResponse.builder()
                                 .idUser(user.getId())
                                 .accessToken(accessToken)
-                                .refreshToken(refreshToken.getRefreshToken())
                                 .build();
         }
 
@@ -62,12 +58,10 @@ public class AuthService {
                 var user = userRepository.findByEmail(loginRequest.getEmail())
                                 .orElseThrow(() -> new UsernameNotFoundException("User not found!"));
                 var accessToken = jwtService.generateToken(user);
-                var refreshToken = refreshTokenService.createRefreshToken(loginRequest.getEmail());
 
                 return AuthResponse.builder()
                                 .idUser(user.getId())
                                 .accessToken(accessToken)
-                                .refreshToken(refreshToken.getRefreshToken())
                                 .build();
         }
 }

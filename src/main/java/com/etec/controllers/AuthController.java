@@ -2,12 +2,7 @@ package com.etec.controllers;
 
 import com.etec.dto.AuthResponse;
 import com.etec.dto.LoginRequest;
-import com.etec.dto.RefreshTokenRequest;
 import com.etec.dto.RegisterRequest;
-import com.etec.entities.RefreshToken;
-import com.etec.entities.User;
-import com.etec.infra.security.JwtService;
-import com.etec.infra.security.RefreshTokenService;
 import com.etec.service.AuthService;
 
 import lombok.RequiredArgsConstructor;
@@ -24,8 +19,6 @@ import org.springframework.web.bind.annotation.RestController;
 public class AuthController {
 
     private final AuthService authService;
-    private final RefreshTokenService refreshTokenService;
-    private final JwtService jwtService;
 
     @PostMapping("/register")
     public ResponseEntity<AuthResponse> register(@RequestBody RegisterRequest registerRequest) {
@@ -35,19 +28,5 @@ public class AuthController {
     @PostMapping("/login")
     public ResponseEntity<AuthResponse> login(@RequestBody LoginRequest loginRequest) {
         return ResponseEntity.ok(authService.login(loginRequest));
-    }
-
-    @PostMapping("/refresh")
-    public ResponseEntity<AuthResponse> refreshToken(@RequestBody RefreshTokenRequest refreshTokenRequest) {
-
-        RefreshToken refreshToken = refreshTokenService.verifyRefreshToken(refreshTokenRequest.getRefreshToken());
-        User user = refreshToken.getUser();
-
-        String accessToken = jwtService.generateToken(user);
-
-        return ResponseEntity.ok(AuthResponse.builder()
-                .accessToken(accessToken)
-                .refreshToken(refreshToken.getRefreshToken())
-                .build());
     }
 }

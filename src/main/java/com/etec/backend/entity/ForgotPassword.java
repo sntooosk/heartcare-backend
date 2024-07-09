@@ -27,7 +27,7 @@ public class ForgotPassword {
     @Column(name = "tb04_expiration_time", nullable = false)
     private Date expirationTime;
 
-    @OneToOne
-    @JoinColumn(name = "tb04_auth_id", referencedColumnName = "tb01_id")
+    @ManyToOne
+    @JoinColumn(name = "tb04_user_id")
     private Auth auth;
 }

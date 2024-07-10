@@ -2,7 +2,6 @@ package com.etec.backend.service.impl;
 
 import com.etec.backend.dto.PressureResponseDTO;
 import com.etec.backend.dto.ResponseDTO;
-import com.etec.backend.entity.Post;
 import com.etec.backend.entity.Pressure;
 import com.etec.backend.repository.PressureRepository;
 import com.etec.backend.service.PressureService;
@@ -39,28 +38,40 @@ public class PressureServiceImpl implements PressureService {
 
     @Override
     public Object create(Pressure pressure) {
-        Pressure savedPressure = pressureRepository.save(pressure);
-        return new PressureResponseDTO(savedPressure.getId(), savedPressure.getDiastolic(), savedPressure.getSystolic(),
-                savedPressure.getPulse(), savedPressure.getDate());
+        try {
+            Pressure savedPressure = pressureRepository.save(pressure);
+            return new PressureResponseDTO(savedPressure.getId(), savedPressure.getDiastolic(), savedPressure.getSystolic(),
+                    savedPressure.getPulse(), savedPressure.getDate());
+        } catch (Exception e) {
+            return new ResponseDTO("ERROR", "Erro ao criar pressão arterial: " + e.getMessage());
+        }
     }
 
     @Override
     public Object update(Long id, Pressure pressure) {
-        if (!pressureRepository.existsById(id)) {
-            return new ResponseDTO("ERROR", "O ID especificado não existe: " + id);
+        try {
+            if (!pressureRepository.existsById(id)) {
+                return new ResponseDTO("ERROR", "O ID especificado não existe: " + id);
+            }
+            pressure.setId(id);
+            Pressure updatedPressure = pressureRepository.save(pressure);
+            return new PressureResponseDTO(updatedPressure.getId(), updatedPressure.getDiastolic(),
+                    updatedPressure.getSystolic(), updatedPressure.getPulse(), updatedPressure.getDate());
+        } catch (Exception e) {
+            return new ResponseDTO("ERROR", "Erro ao atualizar pressão arterial: " + e.getMessage());
         }
-        pressure.setId(id);
-        Pressure updatedPressure = pressureRepository.save(pressure);
-        return new PressureResponseDTO(updatedPressure.getId(), updatedPressure.getDiastolic(),
-                updatedPressure.getSystolic(), updatedPressure.getPulse(), updatedPressure.getDate());
     }
 
     @Override
-    public ResponseDTO delete(Long id) {
-        if (!pressureRepository.existsById(id)) {
-            return new ResponseDTO("ERROR", "O ID especificado não existe: " + id);
+    public Object delete(Long id) {
+        try {
+            if (!pressureRepository.existsById(id)) {
+                return new ResponseDTO("ERROR", "O ID especificado não existe: " + id);
+            }
+            pressureRepository.deleteById(id);
+            return new ResponseDTO("OK", "Pressão arterial removida com sucesso.");
+        } catch (Exception e) {
+            return new ResponseDTO("ERROR", "Erro ao excluir pressão arterial: " + e.getMessage());
         }
-        pressureRepository.deleteById(id);
-        return new ResponseDTO("OK", "O ID especificado foi removido com sucesso: " + id);
     }
 }

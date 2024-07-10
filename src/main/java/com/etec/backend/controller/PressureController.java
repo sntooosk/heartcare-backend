@@ -1,12 +1,9 @@
 package com.etec.backend.controller;
 
 import com.etec.backend.dto.PressureResponseDTO;
-import com.etec.backend.entity.Post;
 import com.etec.backend.entity.Pressure;
 import com.etec.backend.service.PressureService;
 import lombok.RequiredArgsConstructor;
-
-import org.springframework.data.repository.query.Param;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -23,8 +20,8 @@ public class PressureController {
         return pressureService.getAll();
     }
 
-    @GetMapping("/")
-    public List<PressureResponseDTO> findByUserId(@Param("userId") Long userId) {
+    @GetMapping("/user/{userId}")
+    public List<PressureResponseDTO> findByUserId(@PathVariable Long userId) {
         return pressureService.findByUserId(userId);
     }
 

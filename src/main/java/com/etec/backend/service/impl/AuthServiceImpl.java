@@ -35,17 +35,17 @@ public class AuthServiceImpl implements AuthService {
                 String token = tokenService.generateToken(auth);
                 return new AuthResponseDTO(auth.getId(), auth.getUser().getName(), auth.getEmail(), token);
             } else {
-                return new ResponseDTO("Senha incorreta.");
+                return new ResponseDTO("ERROR", "Senha incorreta.");
             }
         }
-        return new ResponseDTO("E-mail não encontrado.");
+        return new ResponseDTO("ERROR", "E-mail não encontrado.");
     }
 
     @Override
     public Object register(RegisterRequestDTO body) {
         Optional<Auth> existingAuthOptional = authRepository.findByEmail(body.email());
         if (existingAuthOptional.isPresent()) {
-            return new ResponseDTO("E-mail já em uso.");
+            return new ResponseDTO("ERROR", "E-mail já em uso.");
         }
 
         Auth newAuth = new Auth();

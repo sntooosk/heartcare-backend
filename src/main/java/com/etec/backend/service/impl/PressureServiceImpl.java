@@ -37,7 +37,7 @@ public class PressureServiceImpl implements PressureService {
     @Override
     public Object update(Long id, Pressure pressure) {
         if (!pressureRepository.existsById(id)) {
-            return new ResponseDTO("O ID especificado não existe: " + id);
+            return new ResponseDTO("ERROR", "O ID especificado não existe: " + id);
         }
         pressure.setId(id);
         Pressure updatedPressure = pressureRepository.save(pressure);
@@ -46,11 +46,11 @@ public class PressureServiceImpl implements PressureService {
     }
 
     @Override
-    public Object delete(Long id) {
+    public ResponseDTO delete(Long id) {
         if (!pressureRepository.existsById(id)) {
-            return new ResponseDTO("O ID especificado não existe: " + id);
+            return new ResponseDTO("ERROR", "O ID especificado não existe: " + id);
         }
         pressureRepository.deleteById(id);
-        return new ResponseDTO("O ID especificado foi removido com sucesso: " + id);
+        return new ResponseDTO("OK" ,"O ID especificado foi removido com sucesso: " + id);
     }
 }

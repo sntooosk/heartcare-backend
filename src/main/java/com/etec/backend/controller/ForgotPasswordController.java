@@ -8,9 +8,7 @@ import com.etec.backend.entity.ForgotPassword;
 import com.etec.backend.repository.AuthRepository;
 import com.etec.backend.repository.ForgotPasswordRepository;
 import com.etec.backend.utils.EmailService;
-
 import lombok.RequiredArgsConstructor;
-
 import org.springframework.web.bind.annotation.*;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
@@ -36,7 +34,7 @@ public class ForgotPasswordController {
         Optional<Auth> authOptional = authRepository.findByEmail(email);
 
         if (authOptional.isEmpty()) {
-            return new ResponseDTO("Por favor, forneça um email válido: " + email );
+            return new ResponseDTO("ERROR", "Por favor, forneça um email válido");
         }
 
         Auth auth = authOptional.get();
@@ -57,7 +55,7 @@ public class ForgotPasswordController {
         emailService.sendSimpleMessage(emailRequestDTO);
         forgotPasswordRepository.save(fp);
 
-        return new ResponseDTO("Email enviado para verificação!");
+        return new ResponseDTO("OK", "Email enviado para verificação!");
     }
 
     @PostMapping("/verifyOtp/{otp}/{email}")
@@ -65,37 +63,37 @@ public class ForgotPasswordController {
         Optional<Auth> authOptional = authRepository.findByEmail(email);
 
         if (authOptional.isEmpty()) {
-            return new ResponseDTO("Por favor, forneça um email válido!");
+            return new ResponseDTO("ERROR", "Por favor, forneça um email válido!");
         }
 
         Auth auth = authOptional.get();
         Optional<ForgotPassword> fpOptional = forgotPasswordRepository.findByOtpAndUser(otp, auth);
 
         if (fpOptional.isEmpty()) {
-            return new ResponseDTO("OTP inválido para o email: " + email);
+            return new ResponseDTO("ERROR", "OTP inválido para o email: " + email);
         }
 
         ForgotPassword fp = fpOptional.get();
 
         if (fp.getExpirationTime().before(Date.from(Instant.now()))) {
             forgotPasswordRepository.deleteById(fp.getId());
-            return new ResponseDTO("OTP expirou!");
+            return new ResponseDTO("ERROR", "OTP expirou!");
         }
 
-        return new ResponseDTO("OTP verificado com sucesso!");
+        return new ResponseDTO("OK", "OTP verificado com sucesso!");
     }
 
     @PostMapping("/changePassword/{email}")
     public ResponseDTO changePasswordHandler(@RequestBody ChangePasswordRequestDTO changePasswordRequestDTO,
                                              @PathVariable String email) {
         if (!Objects.equals(changePasswordRequestDTO.password(), changePasswordRequestDTO.repeatPassword())) {
-            return new ResponseDTO("Por favor, digite a senha novamente!");
+            return new ResponseDTO("ERROR", "Por favor, digite a senha novamente!");
         }
 
         String encodedPassword = passwordEncoder.encode(changePasswordRequestDTO.password());
         authRepository.updatePassword(email, encodedPassword);
 
-        return new ResponseDTO("Senha alterada com sucesso!");
+        return new ResponseDTO("OK", "Senha alterada com sucesso!");
     }
 
     private Long otpGenerator() {

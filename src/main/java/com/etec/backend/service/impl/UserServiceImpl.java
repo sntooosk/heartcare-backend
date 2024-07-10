@@ -5,6 +5,7 @@ import com.etec.backend.dto.UserResponseDTO;
 import com.etec.backend.entity.User;
 import com.etec.backend.repository.UserRepository;
 import com.etec.backend.service.UserService;
+
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -21,28 +22,18 @@ public class UserServiceImpl implements UserService {
         Optional<User> userOptional = userRepository.findById(id);
         return userOptional
                 .map(user -> new UserResponseDTO(user.getId(), user.getName(), user.getLastname(), user.getDob(),
-                        user.getGender(), user.getPhoto()))
-                .orElse(null);
+                        user.getGender(), user.getPhoto()));  
     }
 
     @Override
     public Object update(Long id, User user) {
         if (!userRepository.existsById(id)) {
-            return new ResponseDTO("O ID especificado não existe: " + id);
+            return new ResponseDTO("ERROR", "O ID especificado não existe: " + id);
         }
-        
+
         user.setId(id);
         User updatedUser = userRepository.save(user);
         return new UserResponseDTO(updatedUser.getId(), updatedUser.getName(), updatedUser.getLastname(),
                 updatedUser.getDob(), updatedUser.getGender(), updatedUser.getPhoto());
-    }
-
-    @Override
-    public Object delete(Long id) {
-        if (!userRepository.existsById(id)) {
-            return new ResponseDTO("O ID especificado não existe: " + id);
-        }
-        userRepository.deleteById(id);
-        return new ResponseDTO("O ID especificado foi removido com sucesso: " + id);
     }
 }

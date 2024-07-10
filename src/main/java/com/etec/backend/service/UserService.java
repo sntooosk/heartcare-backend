@@ -7,6 +7,5 @@ public interface UserService {
 
     Object listId(Long id);
     Object update(Long id, User user);
-    Object delete(Long id);
 
 }

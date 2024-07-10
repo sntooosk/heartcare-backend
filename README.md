@@ -1,7 +1,9 @@
 <h1 align="center">Backend Heartcare com Java Spring e JWT 🔐</h1>
 
-[![java-spring](https://img.shields.io/badge/java-spring-brightgreen?style=for-the-badge&logo=spring)](https://spring.io/)
-[![jwt](https://img.shields.io/badge/jwt-JSON%20Web%20Token-green?style=for-the-badge)](https://jwt.io/)
+[Java](https://img.shields.io/badge/java-%23ED8B00.svg?style=for-the-badge&logo=openjdk&logoColor=white)
+![Spring](https://img.shields.io/badge/spring-%236DB33F.svg?style=for-the-badge&logo=spring&logoColor=white)
+![Postgres](https://img.shields.io/badge/postgres-%23316192.svg?style=for-the-badge&logo=postgresql&logoColor=white)
+![JWT](https://img.shields.io/badge/JWT-black?style=for-the-badge&logo=JSON%20web%20tokens)
 
 <p align="center">
  <a href="#tech-stack">Tecnologias Utilizadas</a> • 

@@ -2,6 +2,7 @@ package com.etec.backend.service.impl;
 
 import com.etec.backend.dto.PressureResponseDTO;
 import com.etec.backend.dto.ResponseDTO;
+import com.etec.backend.entity.Post;
 import com.etec.backend.entity.Pressure;
 import com.etec.backend.repository.PressureRepository;
 import com.etec.backend.service.PressureService;
@@ -17,6 +18,15 @@ import java.util.stream.Collectors;
 public class PressureServiceImpl implements PressureService {
 
     private final PressureRepository pressureRepository;
+
+    @Override
+    public List<PressureResponseDTO> getAll() {
+        List<Pressure> pressures = pressureRepository.findAll();
+        return pressures.stream()
+                .map(pressure -> new PressureResponseDTO(pressure.getId(), pressure.getDiastolic(),
+                        pressure.getSystolic(), pressure.getPulse(), pressure.getDate()))
+                .collect(Collectors.toList());
+    }
 
     @Override
     public List<PressureResponseDTO> findByUserId(Long userId) {
@@ -51,6 +61,6 @@ public class PressureServiceImpl implements PressureService {
             return new ResponseDTO("ERROR", "O ID especificado não existe: " + id);
         }
         pressureRepository.deleteById(id);
-        return new ResponseDTO("OK" ,"O ID especificado foi removido com sucesso: " + id);
+        return new ResponseDTO("OK", "O ID especificado foi removido com sucesso: " + id);
     }
 }

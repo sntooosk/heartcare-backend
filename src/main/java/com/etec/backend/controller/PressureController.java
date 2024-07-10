@@ -1,6 +1,7 @@
 package com.etec.backend.controller;
 
 import com.etec.backend.dto.PressureResponseDTO;
+import com.etec.backend.entity.Post;
 import com.etec.backend.entity.Pressure;
 import com.etec.backend.service.PressureService;
 import lombok.RequiredArgsConstructor;
@@ -17,6 +18,10 @@ public class PressureController {
 
     private final PressureService pressureService;
 
+    @GetMapping("/")
+    public List<PressureResponseDTO> getAll() {
+        return pressureService.getAll();
+    }
 
     @GetMapping("/")
     public List<PressureResponseDTO> findByUserId(@Param("userId") Long userId) {

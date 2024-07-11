@@ -26,4 +26,9 @@ public class Auth {
 
     @OneToOne(mappedBy = "auth")
     private User user;
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "tb01_role")
+    private AuthRole role;
+
 }

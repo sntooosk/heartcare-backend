@@ -1,4 +1,6 @@
 package com.etec.backend.dto;
 
-public record AuthResponseDTO(Long id , String name, String email, String token) {
+import com.etec.backend.entity.AuthRole;
+
+public record AuthResponseDTO(Long id , String name, String email, String token , AuthRole role) {
 }

@@ -33,7 +33,7 @@ public class AuthServiceImpl implements AuthService {
             Auth auth = authOptional.get();
             if (passwordEncoder.matches(body.password(), auth.getPassword())) {
                 String token = tokenService.generateToken(auth);
-                return new AuthResponseDTO(auth.getId(), auth.getUser().getName(), auth.getEmail(), token);
+                return new AuthResponseDTO(auth.getId(), auth.getUser().getName(), auth.getEmail(), token , auth.getRole());
             } else {
                 return new ResponseDTO("ERROR", "Senha incorreta.");
             }
@@ -51,6 +51,7 @@ public class AuthServiceImpl implements AuthService {
         Auth newAuth = new Auth();
         newAuth.setEmail(body.email());
         newAuth.setPassword(passwordEncoder.encode(body.password()));
+        newAuth.setRole(body.role());
         String token = tokenService.generateToken(newAuth);
         authRepository.save(newAuth);
 
@@ -58,6 +59,6 @@ public class AuthServiceImpl implements AuthService {
         newUser.setName(body.name());
         newUser.setAuth(newAuth);
         userRepository.save(newUser);
-        return new AuthResponseDTO(newAuth.getId(), newUser.getName(), newAuth.getEmail(), token);
+        return new AuthResponseDTO(newAuth.getId(), newUser.getName(), newAuth.getEmail(), token , newAuth.getRole());
     }
 }

@@ -1,11 +1,11 @@
 package com.etec.backend.service.impl;
 
+import com.etec.backend.dto.PressureConcatResponseDTO;
 import com.etec.backend.dto.PressureResponseDTO;
 import com.etec.backend.dto.ResponseDTO;
 import com.etec.backend.entity.Pressure;
 import com.etec.backend.repository.PressureRepository;
 import com.etec.backend.service.PressureService;
-
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -19,12 +19,8 @@ public class PressureServiceImpl implements PressureService {
     private final PressureRepository pressureRepository;
 
     @Override
-    public List<PressureResponseDTO> getAll() {
-        List<Pressure> pressures = pressureRepository.findAll();
-        return pressures.stream()
-                .map(pressure -> new PressureResponseDTO(pressure.getId(), pressure.getDiastolic(),
-                        pressure.getSystolic(), pressure.getPulse(), pressure.getDate()))
-                .collect(Collectors.toList());
+    public List<PressureConcatResponseDTO> getAll() {
+        return pressureRepository.listarTodosComDadosUserDTO();
     }
 
     @Override
@@ -40,8 +36,8 @@ public class PressureServiceImpl implements PressureService {
     public Object create(Pressure pressure) {
         try {
             Pressure savedPressure = pressureRepository.save(pressure);
-            return new PressureResponseDTO(savedPressure.getId(), savedPressure.getDiastolic(), savedPressure.getSystolic(),
-                    savedPressure.getPulse(), savedPressure.getDate());
+            return new PressureResponseDTO(savedPressure.getId(), savedPressure.getDiastolic(),
+                    savedPressure.getSystolic(), savedPressure.getPulse(), savedPressure.getDate());
         } catch (Exception e) {
             return new ResponseDTO("ERROR", "Erro ao criar pressão arterial: " + e.getMessage());
         }

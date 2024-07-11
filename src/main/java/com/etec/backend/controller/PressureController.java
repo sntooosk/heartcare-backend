@@ -1,5 +1,6 @@
 package com.etec.backend.controller;
 
+import com.etec.backend.dto.PressureConcatResponseDTO;
 import com.etec.backend.dto.PressureResponseDTO;
 import com.etec.backend.entity.Pressure;
 import com.etec.backend.service.PressureService;
@@ -16,7 +17,7 @@ public class PressureController {
     private final PressureService pressureService;
 
     @GetMapping("/")
-    public List<PressureResponseDTO> getAll() {
+    public List<PressureConcatResponseDTO> findByAllConcat() {
         return pressureService.getAll();
     }
 

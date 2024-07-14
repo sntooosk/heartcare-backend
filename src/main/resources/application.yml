@@ -32,4 +32,4 @@ base:
 api:
   security:
     token:
-      secret: ${API_SECURITY_TOKEN_SECRET}
+      secret: ${SPRING_SECURITY_TOKEN_SECRET}

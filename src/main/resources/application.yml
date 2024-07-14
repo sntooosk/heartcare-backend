@@ -1,8 +1,8 @@
 spring:
   datasource:
-    username: heartcare_db_user
-    password: AxVwb8E5UEm2I93eSs0UYsviYC1cXxk8
-    url: jdbc:postgresql://dpg-cov0f2o21fec73bvtuo0-a.oregon-postgres.render.com:5432/heartcare_db
+    username: ${SPRING_DATASOURCE_USERNAME}
+    password: ${SPRING_DATASOURCE_PASSWORD}
+    url: ${SPRING_DATASOURCE_URL}
   jpa:
     hibernate:
       ddl-auto: update
@@ -17,8 +17,8 @@ spring:
   mail:
     host: smtp.gmail.com
     port: 587
-    username: "heartcaresoftwares@gmail.com"
-    password: "txxbpcrxyhetyzga"
+    username: ${SPRING_MAIL_USERNAME}
+    password: ${SPRING_MAIL_PASSWORD}
     properties:
       mail:
         smtp:
@@ -32,4 +32,4 @@ base:
 api:
   security:
     token:
-      secret: "BF7FD11ACE545745B7BA1AF98B6F156D127BC7BB544BAB6A4FD74E4FC7"
+      secret: ${API_SECURITY_TOKEN_SECRET}

@@ -1,6 +1,3 @@
-Aqui está uma descrição mais técnica focada nos detalhes do projeto:
-
----
 
 # HeartCare Backend
 

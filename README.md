@@ -1,41 +1,42 @@
+Aqui está uma descrição mais técnica focada nos detalhes do projeto:
 
-
+---
 
 # HeartCare Backend
 
-Backend desenvolvido em Java para o projeto HeartCare, dedicado aos cuidados cardíacos. Inclui controladores, DTOs, entidades e camadas de infraestrutura, repositório, serviço e utilitários.
+Backend desenvolvido em Java utilizando Spring Framework para suportar aplicações dedicadas aos cuidados cardíacos. O projeto é estruturado em controladores RESTful, DTOs para transferência de dados, entidades JPA para mapeamento de banco de dados, além de camadas de infraestrutura, repositório, serviço e utilitários.
 
 ## Estrutura do Projeto
 
-- **HeartCareApplication.java**: Arquivo principal de configuração da aplicação.
+- **HeartCareApplication.java**: Ponto de entrada da aplicação Spring Boot.
   
 ### Controllers
 
-- **AuthController.java**: Controlador para autenticação e autorização de usuários.
-- **ForgotPasswordController.java**: Controlador para redefinição de senha.
-- **PostController.java**: Controlador para operações relacionadas a publicações.
-- **PressureController.java**: Controlador para medições de pressão arterial.
-- **UserController.java**: Controlador para operações de usuário.
+- **AuthController.java**: Responsável pela autenticação e autorização de usuários.
+- **ForgotPasswordController.java**: Lida com processos de recuperação de senha.
+- **PostController.java**: Gerencia operações relacionadas a publicações na plataforma.
+- **PressureController.java**: Controla as medições de pressão arterial dos usuários.
+- **UserController.java**: Gerencia operações relacionadas aos perfis de usuário.
 
 ### DTOs
 
-- DTOs são usados para transferência de dados entre camadas do sistema.
+- Utilizados para transferência de dados entre as camadas do sistema.
 
 ### Entity
 
-- **Entidades JPA** representando dados no banco de dados.
+- Entidades JPA que representam os objetos persistentes no banco de dados.
 
 ### Infraestrutura
 
-- **Configurações de infraestrutura** e inicialização da aplicação.
+- Configurações de inicialização e configuração da aplicação.
 
 ### Repository
 
-- Interfaces de repositório para acesso aos dados.
+- Interfaces que definem operações de acesso aos dados no banco.
 
 ### Service
 
-- Lógica de negócios e serviços da aplicação.
+- Lógica de negócios e serviços essenciais da aplicação.
 
 ### Utils
 
@@ -47,7 +48,6 @@ Backend desenvolvido em Java para o projeto HeartCare, dedicado aos cuidados car
 ![Spring](https://img.shields.io/badge/spring-%236DB33F.svg?style=for-the-badge&logo=spring&logoColor=white)
 ![Postgres](https://img.shields.io/badge/postgres-%23316192.svg?style=for-the-badge&logo=postgresql&logoColor=white)
 
-
 ## Execução
 
 1. Clone o repositório:
@@ -55,7 +55,7 @@ Backend desenvolvido em Java para o projeto HeartCare, dedicado aos cuidados car
     git clone https://github.com/sntooosk/heartcare-backend.git
     ```
 
-2. Importe o projeto na sua IDE de preferência e inicie a aplicação.
+2. Importe o projeto em sua IDE e inicie a aplicação.
 
 ## Contribuição
 
@@ -76,7 +76,7 @@ Backend desenvolvido em Java para o projeto HeartCare, dedicado aos cuidados car
 
 ## Licença
 
-Este projeto está licenciado sob a Licença MIT. Veja o arquivo [LICENSE](LICENSE) para mais detalhes.
+Este projeto está licenciado sob a Licença MIT. Consulte o arquivo [LICENSE](LICENSE) para mais detalhes.
 
 ## Contato
 

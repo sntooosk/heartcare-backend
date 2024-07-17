@@ -1,12 +1,11 @@
 
-# HeartCare Backend
+## Tecnologias Utilizadas
 
-Backend desenvolvido em Java utilizando Spring Framework para suportar aplicações dedicadas aos cuidados cardíacos. O projeto é estruturado em controladores RESTful, DTOs para transferência de dados, entidades JPA para mapeamento de banco de dados, além de camadas de infraestrutura, repositório, serviço e utilitários.
+![Java](https://img.shields.io/badge/java-%23ED8B00.svg?style=for-the-badge&logo=openjdk&logoColor=white)
+![Spring](https://img.shields.io/badge/spring-%236DB33F.svg?style=for-the-badge&logo=spring&logoColor=white)
+![Postgres](https://img.shields.io/badge/postgres-%23316192.svg?style=for-the-badge&logo=postgresql&logoColor=white)
 
-## Estrutura do Projeto
 
-- **HeartCareApplication.java**: Ponto de entrada da aplicação Spring Boot.
-  
 ### Controllers
 
 - **AuthController.java**: Responsável pela autenticação e autorização de usuários.
@@ -15,35 +14,6 @@ Backend desenvolvido em Java utilizando Spring Framework para suportar aplicaç�
 - **PressureController.java**: Controla as medições de pressão arterial dos usuários.
 - **UserController.java**: Gerencia operações relacionadas aos perfis de usuário.
 
-### DTOs
-
-- Utilizados para transferência de dados entre as camadas do sistema.
-
-### Entity
-
-- Entidades JPA que representam os objetos persistentes no banco de dados.
-
-### Infraestrutura
-
-- Configurações de inicialização e configuração da aplicação.
-
-### Repository
-
-- Interfaces que definem operações de acesso aos dados no banco.
-
-### Service
-
-- Lógica de negócios e serviços essenciais da aplicação.
-
-### Utils
-
-- Classes utilitárias para funcionalidades diversas.
-
-## Tecnologias Utilizadas
-
-![Java](https://img.shields.io/badge/java-%23ED8B00.svg?style=for-the-badge&logo=openjdk&logoColor=white)
-![Spring](https://img.shields.io/badge/spring-%236DB33F.svg?style=for-the-badge&logo=spring&logoColor=white)
-![Postgres](https://img.shields.io/badge/postgres-%23316192.svg?style=for-the-badge&logo=postgresql&logoColor=white)
 
 ## Execução
 
@@ -78,9 +48,3 @@ Este projeto está licenciado sob a Licença MIT. Consulte o arquivo [LICENSE](L
 ## Contato
 
 Juliano Cassimiro dos Santos - [LinkedIn](https://www.linkedin.com/in/sntooosk)
-
----
-
-<div align="center">
-  <strong>HeartCare</strong> - Cuidando do seu coração com tecnologia
-</div>

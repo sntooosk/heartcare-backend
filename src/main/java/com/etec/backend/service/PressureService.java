@@ -1,16 +1,13 @@
 package com.etec.backend.service;
 
-import com.etec.backend.dto.PressureConcatResponseDTO;
-import com.etec.backend.dto.PressureResponseDTO;
+import com.etec.backend.dto.ResponseDTO;
 import com.etec.backend.entity.Pressure;
-
-import java.util.List;
 
 public interface PressureService {
 
-    List<PressureConcatResponseDTO> getAll();
-    List<PressureResponseDTO> findByUserId(Long userId);
-    Object create(Pressure pressure);
-    Object update(Long id, Pressure pressure);
-    Object delete(Long id);
+    Object getAllConcat();
+    Object findByUserId(Long userId);
+    ResponseDTO create(Pressure pressure);
+    ResponseDTO update(Long id, Pressure pressure);
+    ResponseDTO delete(Long id);
 }

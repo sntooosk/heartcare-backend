@@ -1,15 +1,14 @@
 package com.etec.backend.repository;
 
-import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Query;
-
 import com.etec.backend.entity.Auth;
 import com.etec.backend.entity.ForgotPassword;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 
 import java.util.Optional;
 
 public interface ForgotPasswordRepository extends JpaRepository<ForgotPassword, Long> {
 
-    @Query("select fp from ForgotPassword fp where fp.otp = ?1 and fp.auth = ?2")
-    Optional<ForgotPassword> findByOtpAndUser(Long otp, Auth auth);
+    @Query("SELECT fp FROM ForgotPassword fp WHERE fp.otp = ?1 AND fp.auth = ?2")
+    Optional<ForgotPassword> findByOtpAndAuth(Long otp, Auth auth);
 }

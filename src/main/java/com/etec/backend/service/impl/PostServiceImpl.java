@@ -1,6 +1,5 @@
 package com.etec.backend.service.impl;
 
-import com.etec.backend.dto.PostResponseDTO;
 import com.etec.backend.dto.ResponseDTO;
 import com.etec.backend.entity.Post;
 import com.etec.backend.repository.PostRepository;
@@ -28,7 +27,7 @@ public class PostServiceImpl implements PostService {
     @Override
     public Object create(Post post) {
         Post savedPost = postRepository.save(post);
-        return new PostResponseDTO(savedPost.getTitle(), savedPost.getComment());
+        return new ResponseDTO("OK", "Post criado com sucesso: " + savedPost.getTitle());
     }
 
     @Override
@@ -38,7 +37,7 @@ public class PostServiceImpl implements PostService {
         }
         post.setId(id);
         Post updatedPost = postRepository.save(post);
-        return new PostResponseDTO(updatedPost.getTitle(), updatedPost.getComment());
+        return new ResponseDTO("OK", "Post atualizado com sucesso: " + updatedPost.getTitle());
     }
 
     @Override

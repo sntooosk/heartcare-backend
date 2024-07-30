@@ -8,9 +8,6 @@ import com.etec.backend.entity.ForgotPassword;
 import com.etec.backend.repository.AuthRepository;
 import com.etec.backend.repository.ForgotPasswordRepository;
 import com.etec.backend.utils.EmailService;
-import io.swagger.v3.oas.annotations.Operation;
-import io.swagger.v3.oas.annotations.responses.ApiResponse;
-import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
@@ -22,8 +19,7 @@ import java.util.Optional;
 import java.util.Random;
 
 @RestController
-@RequestMapping(value = "/forgotPassword", produces = "application/json")
-
+@RequestMapping(value = "/forgotPassword")
 @RequiredArgsConstructor
 public class ForgotPasswordController {
 
@@ -32,11 +28,6 @@ public class ForgotPasswordController {
     private final ForgotPasswordRepository forgotPasswordRepository;
     private final PasswordEncoder passwordEncoder;
 
-    @Operation(summary = "Enviar email de verificação para redefinição de senha", method = "POST", description = "Envia um email com um OTP para verificar a redefinição de senha.")
-    @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "Email enviado com sucesso para verificação"),
-            @ApiResponse(responseCode = "400", description = "Erro ao enviar email")
-    })
     @PostMapping("/verifyMail/{email}")
     public ResponseDTO verifyEmail(@PathVariable String email) {
         Optional<Auth> authOptional = authRepository.findByEmail(email);
@@ -66,11 +57,6 @@ public class ForgotPasswordController {
         return new ResponseDTO("OK", "Email enviado para verificação!");
     }
 
-    @Operation(summary = "Verificar OTP para redefinição de senha", method = "POST", description = "Verifica se o OTP enviado é válido para redefinição de senha.")
-    @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "OTP verificado com sucesso"),
-            @ApiResponse(responseCode = "400", description = "Erro na verificação do OTP")
-    })
     @PostMapping("/verifyOtp/{otp}/{email}")
     public ResponseDTO verifyOtp(@PathVariable Long otp, @PathVariable String email) {
         Optional<Auth> authOptional = authRepository.findByEmail(email);
@@ -96,11 +82,6 @@ public class ForgotPasswordController {
         return new ResponseDTO("OK", "OTP verificado com sucesso!");
     }
 
-    @Operation(summary = "Alterar senha após verificação do OTP", method = "POST", description = "Altera a senha do usuário após a verificação bem-sucedida do OTP.")
-    @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "Senha alterada com sucesso"),
-            @ApiResponse(responseCode = "400", description = "Erro ao alterar senha")
-    })
     @PostMapping("/changePassword/{email}")
     public ResponseDTO changePasswordHandler(@RequestBody ChangePasswordRequestDTO changePasswordRequestDTO,
                                              @PathVariable String email) {

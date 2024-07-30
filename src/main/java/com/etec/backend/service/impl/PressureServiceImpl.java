@@ -6,9 +6,6 @@ import com.etec.backend.dto.ResponseDTO;
 import com.etec.backend.entity.Pressure;
 import com.etec.backend.repository.PressureRepository;
 import com.etec.backend.service.PressureService;
-import io.swagger.v3.oas.annotations.Operation;
-import io.swagger.v3.oas.annotations.responses.ApiResponse;
-import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -21,17 +18,11 @@ public class PressureServiceImpl implements PressureService {
 
     private final PressureRepository pressureRepository;
 
-    @Operation(summary = "Listar todas as medições de pressão arterial concatenadas", description = "Retorna uma lista de todas as medições de pressão arterial concatenadas.")
     @Override
     public List<PressureConcatResponseDTO> getAll() {
         return pressureRepository.listarTodosComDadosUserDTO();
     }
 
-    @Operation(summary = "Listar medições de pressão arterial por ID de usuário", description = "Retorna uma lista de medições de pressão arterial com base no ID do usuário fornecido.")
-    @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "Medições encontradas"),
-            @ApiResponse(responseCode = "404", description = "Nenhuma medição encontrada para o usuário")
-    })
     @Override
     public List<PressureResponseDTO> findByUserId(Long userId) {
         List<Pressure> pressures = pressureRepository.findByUserId(userId);
@@ -41,11 +32,6 @@ public class PressureServiceImpl implements PressureService {
                 .collect(Collectors.toList());
     }
 
-    @Operation(summary = "Criar uma nova medição de pressão arterial", description = "Cria uma nova medição de pressão arterial com base nos dados fornecidos.")
-    @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "Medição criada com sucesso", content = @io.swagger.v3.oas.annotations.media.Content(schema = @io.swagger.v3.oas.annotations.media.Schema(implementation = PressureResponseDTO.class))),
-            @ApiResponse(responseCode = "400", description = "Erro ao criar medição")
-    })
     @Override
     public Object create(Pressure pressure) {
         try {
@@ -57,12 +43,6 @@ public class PressureServiceImpl implements PressureService {
         }
     }
 
-    @Operation(summary = "Atualizar uma medição de pressão arterial pelo ID", description = "Atualiza uma medição de pressão arterial existente com base no ID fornecido.")
-    @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "Medição atualizada com sucesso", content = @io.swagger.v3.oas.annotations.media.Content(schema = @io.swagger.v3.oas.annotations.media.Schema(implementation = PressureResponseDTO.class))),
-            @ApiResponse(responseCode = "400", description = "Erro ao atualizar medição"),
-            @ApiResponse(responseCode = "404", description = "Medição não encontrada")
-    })
     @Override
     public Object update(Long id, Pressure pressure) {
         try {
@@ -78,11 +58,6 @@ public class PressureServiceImpl implements PressureService {
         }
     }
 
-    @Operation(summary = "Excluir uma medição de pressão arterial pelo ID", description = "Exclui uma medição de pressão arterial existente com base no ID fornecido.")
-    @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "Medição excluída com sucesso", content = @io.swagger.v3.oas.annotations.media.Content(schema = @io.swagger.v3.oas.annotations.media.Schema(implementation = ResponseDTO.class))),
-            @ApiResponse(responseCode = "404", description = "Medição não encontrada")
-    })
     @Override
     public Object delete(Long id) {
         try {

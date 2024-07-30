@@ -21,7 +21,7 @@ public class UserServiceImpl implements UserService {
         Optional<User> userOptional = userRepository.findById(id);
         return userOptional
                 .map(user -> new UserResponseDTO(user.getId(), user.getName(), user.getLastname(), user.getDob(),
-                        user.getGender(), user.getPhoto()))
+                        user.getGender(), user.getPhoto()));
     }
 
     @Override

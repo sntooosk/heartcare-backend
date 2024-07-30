@@ -8,6 +8,9 @@ import com.etec.backend.entity.ForgotPassword;
 import com.etec.backend.repository.AuthRepository;
 import com.etec.backend.repository.ForgotPasswordRepository;
 import com.etec.backend.utils.EmailService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
@@ -19,7 +22,8 @@ import java.util.Optional;
 import java.util.Random;
 
 @RestController
-@RequestMapping("/forgotPassword")
+@RequestMapping(value = "/forgotPassword", produces = "application/json")
+
 @RequiredArgsConstructor
 public class ForgotPasswordController {
 
@@ -28,12 +32,17 @@ public class ForgotPasswordController {
     private final ForgotPasswordRepository forgotPasswordRepository;
     private final PasswordEncoder passwordEncoder;
 
+    @Operation(summary = "Enviar email de verificação para redefinição de senha", method = "POST", description = "Envia um email com um OTP para verificar a redefinição de senha.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Email enviado com sucesso para verificação"),
+            @ApiResponse(responseCode = "400", description = "Erro ao enviar email")
+    })
     @PostMapping("/verifyMail/{email}")
     public ResponseDTO verifyEmail(@PathVariable String email) {
         Optional<Auth> authOptional = authRepository.findByEmail(email);
 
         if (authOptional.isEmpty()) {
-            return new ResponseDTO("ERROR", "Email não encontrado.");
+            return new ResponseDTO("ERROR", "Por favor, forneça um email válido");
         }
 
         Auth auth = authOptional.get();
@@ -41,8 +50,8 @@ public class ForgotPasswordController {
         EmailRequestDTO emailRequestDTO = EmailRequestDTO.builder()
                 .to(email)
                 .from("heartcaresoftwares@gmail.com")
-                .text("Seu OTP para redefinir a senha é: " + otp)
-                .subject("OTP para redefinição de senha")
+                .text("Este é o OTP para sua solicitação de redefinição de senha: " + otp)
+                .subject("OTP para solicitação de redefinição de senha")
                 .build();
 
         ForgotPassword fp = ForgotPassword.builder()
@@ -54,48 +63,59 @@ public class ForgotPasswordController {
         emailService.sendSimpleMessage(emailRequestDTO);
         forgotPasswordRepository.save(fp);
 
-        return new ResponseDTO("OK", "Email enviado para verificação.");
+        return new ResponseDTO("OK", "Email enviado para verificação!");
     }
 
+    @Operation(summary = "Verificar OTP para redefinição de senha", method = "POST", description = "Verifica se o OTP enviado é válido para redefinição de senha.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "OTP verificado com sucesso"),
+            @ApiResponse(responseCode = "400", description = "Erro na verificação do OTP")
+    })
     @PostMapping("/verifyOtp/{otp}/{email}")
     public ResponseDTO verifyOtp(@PathVariable Long otp, @PathVariable String email) {
         Optional<Auth> authOptional = authRepository.findByEmail(email);
 
         if (authOptional.isEmpty()) {
-            return new ResponseDTO("ERROR", "Email não encontrado.");
+            return new ResponseDTO("ERROR", "Por favor, forneça um email válido!");
         }
 
         Auth auth = authOptional.get();
-        Optional<ForgotPassword> fpOptional = forgotPasswordRepository.findByOtpAndAuth(otp, auth);
+        Optional<ForgotPassword> fpOptional = forgotPasswordRepository.findByOtpAndUser(otp, auth);
 
         if (fpOptional.isEmpty()) {
-            return new ResponseDTO("ERROR", "OTP inválido para o email fornecido.");
+            return new ResponseDTO("ERROR", "OTP inválido para o email: " + email);
         }
 
         ForgotPassword fp = fpOptional.get();
 
         if (fp.getExpirationTime().before(Date.from(Instant.now()))) {
             forgotPasswordRepository.deleteById(fp.getId());
-            return new ResponseDTO("ERROR", "OTP expirado.");
+            return new ResponseDTO("ERROR", "OTP expirou!");
         }
 
-        return new ResponseDTO("OK", "OTP verificado com sucesso.");
+        return new ResponseDTO("OK", "OTP verificado com sucesso!");
     }
 
+    @Operation(summary = "Alterar senha após verificação do OTP", method = "POST", description = "Altera a senha do usuário após a verificação bem-sucedida do OTP.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Senha alterada com sucesso"),
+            @ApiResponse(responseCode = "400", description = "Erro ao alterar senha")
+    })
     @PostMapping("/changePassword/{email}")
     public ResponseDTO changePasswordHandler(@RequestBody ChangePasswordRequestDTO changePasswordRequestDTO,
-            @PathVariable String email) {
+                                             @PathVariable String email) {
         if (!Objects.equals(changePasswordRequestDTO.password(), changePasswordRequestDTO.repeatPassword())) {
-            return new ResponseDTO("ERROR", "As senhas não coincidem.");
+            return new ResponseDTO("ERROR", "Por favor, digite a senha novamente!");
         }
 
         String encodedPassword = passwordEncoder.encode(changePasswordRequestDTO.password());
         authRepository.updatePassword(email, encodedPassword);
 
-        return new ResponseDTO("OK", "Senha alterada com sucesso.");
+        return new ResponseDTO("OK", "Senha alterada com sucesso!");
     }
 
     private Long otpGenerator() {
-        return new Random().nextLong(100_000, 999_999);
+        Random random = new Random();
+        return random.nextLong(100_000, 999_999);
     }
 }

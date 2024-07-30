@@ -1,14 +1,14 @@
 package com.etec.backend.service;
 
-import com.etec.backend.dto.ResponseDTO;
 import com.etec.backend.entity.Post;
 
+import java.util.List;
 
 public interface PostService {
     
-    Object getAll();
-    ResponseDTO create(Post post);
-    ResponseDTO update(Long id, Post post);
-    ResponseDTO delete(Long id);
+    List<Post> getAll();
+    Object create(Post post);
+    Object update(Long id, Post post);
+    Object delete(Long id);
     
 }

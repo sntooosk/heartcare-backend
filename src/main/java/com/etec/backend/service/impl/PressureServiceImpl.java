@@ -2,6 +2,7 @@ package com.etec.backend.service.impl;
 
 import com.etec.backend.dto.PressureConcatResponseDTO;
 import com.etec.backend.dto.ResponseDTO;
+import com.etec.backend.dto.PressureResponseDTO;
 import com.etec.backend.entity.Pressure;
 import com.etec.backend.repository.PressureRepository;
 import com.etec.backend.service.PressureService;
@@ -23,8 +24,16 @@ public class PressureServiceImpl implements PressureService {
     }
 
     @Override
-    public List<Pressure> findByUserId(Long userId) {
-        return pressureRepository.findByUserId(userId);
+    public List<PressureResponseDTO> findByUserId(Long userId) {
+        List<Pressure> pressures = pressureRepository.findByUserId(userId);
+        return pressures.stream()
+                .map(pressure -> new PressureResponseDTO(
+                        pressure.getId(),
+                        pressure.getDiastolic(),
+                        pressure.getSystolic(),
+                        pressure.getPulse(),
+                        pressure.getDate()))
+                .collect(Collectors.toList());
     }
 
     @Override

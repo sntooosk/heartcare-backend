@@ -32,7 +32,6 @@ public class UserServiceImpl implements UserService {
 
         user.setId(id);
         User updatedUser = userRepository.save(user);
-        return new UserResponseDTO(updatedUser.getId(), updatedUser.getName(), updatedUser.getLastname(),
-                updatedUser.getDob(), updatedUser.getGender(), updatedUser.getPhoto());
+        return new ResponseDTO("OK", "Usuário atualizado com sucesso: " + updatedUser.getName());
     }
 }

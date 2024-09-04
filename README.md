@@ -26,17 +26,23 @@
 
 1. Faça um fork do projeto.
 2. Crie uma branch para sua feature:
+
    ```bash
    git checkout -b minha-feature
    ```
+
 3. Faça commit das suas alterações:
+
    ```bash
    git commit -m 'Adiciona minha feature'
    ```
+
 4. Envie para o branch principal:
+
    ```bash
    git push origin minha-feature
    ```
+
 5. Abra um Pull Request para revisão.
 
 ## Licença

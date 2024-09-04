@@ -12,6 +12,9 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import java.util.Date;
+
+
 @Service
 @RequiredArgsConstructor
 public class PressureServiceImpl implements PressureService {
@@ -38,6 +41,8 @@ public class PressureServiceImpl implements PressureService {
 
     @Override
     public Object create(Pressure pressure) {
+        Date newDate = new  Date();
+        pressure.setDate(newDate);
         try {
             Pressure savedPressure = pressureRepository.save(pressure);
             return new ResponseDTO("OK", "Pressão arterial criada com sucesso: " + savedPressure.getId());

@@ -6,6 +6,9 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.Date;
+
+
 @Entity
 @Table(name = "tb02_pressure")
 @Getter
@@ -28,7 +31,7 @@ public class Pressure {
     private String pulse;
 
     @Column(name = "tb02_date")
-    private String date;
+    private Date date;
 
     @ManyToOne
     @JoinColumn(name = "tb02_user_id")

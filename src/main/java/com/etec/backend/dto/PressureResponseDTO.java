@@ -1,3 +1,6 @@
 package com.etec.backend.dto;
-public record PressureResponseDTO(Long id , String diastolic, String systolic, String pulse, String date) {
+
+import java.util.Date;
+
+public record PressureResponseDTO(Long id , String diastolic, String systolic, String pulse, Date date) {
 }

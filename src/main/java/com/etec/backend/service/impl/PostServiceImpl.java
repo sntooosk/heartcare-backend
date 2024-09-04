@@ -7,6 +7,7 @@ import com.etec.backend.service.PostService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -20,22 +21,26 @@ public class PostServiceImpl implements PostService {
     public List<Post> getAll() {
         List<Post> posts = postRepository.findAll();
         return posts.stream()
-                .map(post -> new Post(post.getId(), post.getTitle(), post.getComment()))
+                .map(post -> new Post(post.getId(), post.getTitle(), post.getComment() , post.getDate()))
                 .collect(Collectors.toList());
     }
 
     @Override
     public Object create(Post post) {
+         Date date = new Date();
+         post.setDate(date);
         Post savedPost = postRepository.save(post);
         return new ResponseDTO("OK", "Post criado com sucesso: " + savedPost.getTitle());
     }
 
     @Override
     public Object update(Long id, Post post) {
+        Date newDate = new Date();
         if (!postRepository.existsById(id)) {
             return new ResponseDTO("ERROR", "O ID especificado não existe: " + id);
         }
         post.setId(id);
+        post.setDate(newDate);
         Post updatedPost = postRepository.save(post);
         return new ResponseDTO("OK", "Post atualizado com sucesso: " + updatedPost.getTitle());
     }

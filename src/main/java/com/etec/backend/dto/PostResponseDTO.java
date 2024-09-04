@@ -1,4 +1,6 @@
 package com.etec.backend.dto;
 
-public record PostResponseDTO(String title, String comment) {}
+import java.util.Date;
+
+public record PostResponseDTO(String title, String comment, Date date) {}
 

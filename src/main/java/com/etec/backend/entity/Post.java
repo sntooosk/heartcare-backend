@@ -1,5 +1,7 @@
 package com.etec.backend.entity;
 
+import java.util.Date;
+
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -23,5 +25,8 @@ public class Post {
 
     @Column(name = "tb03_comment")
     private String comment;
+
+    @Column(name = "tb03_date")
+    private Date date;
 
 }

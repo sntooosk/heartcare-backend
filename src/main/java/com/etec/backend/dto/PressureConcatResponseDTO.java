@@ -1,6 +1,8 @@
 package com.etec.backend.dto;
 
-public record PressureConcatResponseDTO(Long id, String diastolic, String systolic, String pulse, String date,
+import java.util.Date;
+
+public record PressureConcatResponseDTO(Long id, String diastolic, String systolic, String pulse, Date date,
         Long userId, String userName, String userLastName, String userPhoto) {
     public PressureConcatResponseDTO(Object[] tuple) {
         this(
@@ -8,7 +10,7 @@ public record PressureConcatResponseDTO(Long id, String diastolic, String systol
                 (String) tuple[1],
                 (String) tuple[2],
                 (String) tuple[3],
-                (String) tuple[4],
+                (Date) tuple[4],
                 (Long) tuple[5],
                 (String) tuple[6],
                 (String) tuple[7],

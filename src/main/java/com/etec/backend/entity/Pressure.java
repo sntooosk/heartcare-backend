@@ -8,7 +8,6 @@ import lombok.Setter;
 
 import java.util.Date;
 
-
 @Entity
 @Table(name = "tb02_pressure")
 @Getter

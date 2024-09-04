@@ -84,7 +84,7 @@ public class ForgotPasswordController {
 
     @PostMapping("/changePassword/{email}")
     public ResponseDTO changePasswordHandler(@RequestBody ChangePasswordRequestDTO changePasswordRequestDTO,
-                                             @PathVariable String email) {
+            @PathVariable String email) {
         if (!Objects.equals(changePasswordRequestDTO.password(), changePasswordRequestDTO.repeatPassword())) {
             return new ResponseDTO("ERROR", "Por favor, digite a senha novamente!");
         }

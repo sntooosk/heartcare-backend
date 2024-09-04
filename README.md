@@ -1,10 +1,8 @@
-
 ## Tecnologias Utilizadas
 
 ![Java](https://img.shields.io/badge/java-%23ED8B00.svg?style=for-the-badge&logo=openjdk&logoColor=white)
 ![Spring](https://img.shields.io/badge/spring-%236DB33F.svg?style=for-the-badge&logo=spring&logoColor=white)
 ![Postgres](https://img.shields.io/badge/postgres-%23316192.svg?style=for-the-badge&logo=postgresql&logoColor=white)
-
 
 ### Controllers
 
@@ -14,13 +12,13 @@
 - **PressureController.java**: Controla as medições de pressão arterial dos usuários.
 - **UserController.java**: Gerencia operações relacionadas aos perfis de usuário.
 
-
 ## Execução
 
 1. Clone o repositório:
-    ```bash
-    git clone https://github.com/sntooosk/heartcare-backend.git
-    ```
+
+   ```bash
+   git clone https://github.com/sntooosk/heartcare-backend.git
+   ```
 
 2. Importe o projeto em sua IDE e inicie a aplicação.
 
@@ -28,17 +26,17 @@
 
 1. Faça um fork do projeto.
 2. Crie uma branch para sua feature:
-    ```bash
-    git checkout -b minha-feature
-    ```
+   ```bash
+   git checkout -b minha-feature
+   ```
 3. Faça commit das suas alterações:
-    ```bash
-    git commit -m 'Adiciona minha feature'
-    ```
+   ```bash
+   git commit -m 'Adiciona minha feature'
+   ```
 4. Envie para o branch principal:
-    ```bash
-    git push origin minha-feature
-    ```
+   ```bash
+   git push origin minha-feature
+   ```
 5. Abra um Pull Request para revisão.
 
 ## Licença

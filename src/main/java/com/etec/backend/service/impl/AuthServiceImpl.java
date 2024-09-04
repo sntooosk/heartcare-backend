@@ -32,7 +32,8 @@ public class AuthServiceImpl implements AuthService {
             Auth auth = authOptional.get();
             if (passwordEncoder.matches(body.password(), auth.getPassword())) {
                 String token = tokenService.generateToken(auth);
-                return new AuthResponseDTO(auth.getId(), auth.getUser().getName(), auth.getEmail(), token, auth.getRole());
+                return new AuthResponseDTO(auth.getId(), auth.getUser().getName(), auth.getEmail(), token,
+                        auth.getRole());
             } else {
                 return new ResponseDTO("ERROR", "Senha incorreta.");
             }

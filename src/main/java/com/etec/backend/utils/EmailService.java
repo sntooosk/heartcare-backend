@@ -4,7 +4,7 @@ import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
 
-import com.etec.backend.dto.EmailRequestDTO;
+import com.etec.backend.entities.dtos.EmailRequestDTO;
 
 import lombok.RequiredArgsConstructor;
 

@@ -11,8 +11,8 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
-import com.etec.backend.entity.Auth;
-import com.etec.backend.repository.AuthRepository;
+import com.etec.backend.entities.Auth;
+import com.etec.backend.repositories.AuthRepository;
 
 import java.io.IOException;
 import java.util.Collections;

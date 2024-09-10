@@ -26,9 +26,9 @@ public class Medication {
     @Column(name = "tb05_dosage")
     private String dosage;
 
-    @Column(name = "tb05_date_medication")
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date dateMedication;
+    @Column(name = "tb05_time_medication")
+    @Temporal(TemporalType.TIME)
+    private Date TimeMedication;
 
     @ManyToOne
     @JoinColumn(name = "tb05_user_id")

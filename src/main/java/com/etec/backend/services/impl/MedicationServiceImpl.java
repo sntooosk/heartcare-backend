@@ -27,7 +27,7 @@ public class MedicationServiceImpl implements MedicationService {
                         medication.getId(),
                         medication.getName(),
                         medication.getDosage(),
-                        medication.getDateMedication()))
+                        medication.getTimeMedication()))
                 .collect(Collectors.toList());
     }
 

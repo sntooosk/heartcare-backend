@@ -1,6 +1,8 @@
 package com.etec.backend.controllers;
 
+import com.etec.backend.dtos.MedicationConcatResponseDTO;
 import com.etec.backend.dtos.MedicationResponseDTO;
+import com.etec.backend.dtos.PressureConcatResponseDTO;
 import com.etec.backend.entities.Medication;
 import com.etec.backend.services.MedicationService;
 
@@ -15,6 +17,11 @@ import java.util.List;
 public class MedicationController {
 
     private final MedicationService medicationService;
+
+    @GetMapping("/")
+    public List<MedicationConcatResponseDTO> findByAllConcat() {
+        return medicationService.getAll();
+    }
 
     @GetMapping("/user/{userId}")
     public List<MedicationResponseDTO> findByUserId(@PathVariable Long userId) {

@@ -1,6 +1,8 @@
 package com.etec.backend.services.impl;
 
+import com.etec.backend.dtos.MedicationConcatResponseDTO;
 import com.etec.backend.dtos.MedicationResponseDTO;
+import com.etec.backend.dtos.PressureConcatResponseDTO;
 import com.etec.backend.entities.Medication;
 import com.etec.backend.dtos.ResponseDTO;
 import com.etec.backend.repositories.MedicationRepository;
@@ -18,6 +20,12 @@ import java.util.stream.Collectors;
 public class MedicationServiceImpl implements MedicationService {
 
     private final MedicationRepository medicationRepository;
+
+    @Override
+    public List<MedicationConcatResponseDTO> getAll() {
+        return medicationRepository.listarTodosComDadosUserDTO();
+    }
+
 
     @Override
     public List<MedicationResponseDTO> findByUserId(Long userId) {

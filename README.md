@@ -6,48 +6,41 @@
 
 ### Controllers
 
-- **AuthController.java**: Responsável pela autenticação e autorização de usuários.
-- **ForgotPasswordController.java**: Lida com processos de recuperação de senha.
-- **PostController.java**: Gerencia operações relacionadas a publicações na plataforma.
-- **PressureController.java**: Controla as medições de pressão arterial dos usuários.
-- **UserController.java**: Gerencia operações relacionadas aos perfis de usuário.
+- **AuthController.java**: Gerencia autenticação e autorização de usuários.
+- **ForgotPasswordController.java**: Lida com a recuperação de senha.
+- **PostController.java**: Controla as operações de publicações na plataforma.
+- **PressureController.java**: Gerencia as medições de pressão arterial.
+- **MedicationController.java**: Controla informações de medicamentos.
+- **UserController.java**: Gerencia operações relacionadas aos perfis de usuários.
 
 ## Execução
 
 1. Clone o repositório:
+    ```bash
+    git clone https://github.com/sntooosk/heartcare-backend.git
+    ```
 
-   ```bash
-   git clone https://github.com/sntooosk/heartcare-backend.git
-   ```
-
-2. Importe o projeto em sua IDE e inicie a aplicação.
+2. Importe o projeto na sua IDE e inicie a aplicação.
 
 ## Contribuição
 
 1. Faça um fork do projeto.
 2. Crie uma branch para sua feature:
-
-   ```bash
-   git checkout -b minha-feature
-   ```
+    ```bash
+    git checkout -b minha-feature
+    ```
 
 3. Faça commit das suas alterações:
-
-   ```bash
-   git commit -m 'Adiciona minha feature'
-   ```
+    ```bash
+    git commit -m 'Adiciona minha feature'
+    ```
 
 4. Envie para o branch principal:
-
-   ```bash
-   git push origin minha-feature
-   ```
+    ```bash
+    git push origin minha-feature
+    ```
 
 5. Abra um Pull Request para revisão.
-
-## Licença
-
-Este projeto está licenciado sob a Licença MIT. Consulte o arquivo [LICENSE](LICENSE) para mais detalhes.
 
 ## Contato
 

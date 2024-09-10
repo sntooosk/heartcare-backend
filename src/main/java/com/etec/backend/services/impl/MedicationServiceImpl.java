@@ -26,8 +26,7 @@ public class MedicationServiceImpl implements MedicationService {
                 .map(medication -> new MedicationResponseDTO(
                         medication.getId(),
                         medication.getName(),
-                        medication.getDosage(),
-                        medication.getTimeMedication()))
+                        medication.getDosage()))
                 .collect(Collectors.toList());
     }
 

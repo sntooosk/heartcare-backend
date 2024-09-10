@@ -9,31 +9,28 @@ import lombok.Setter;
 import java.util.Date;
 
 @Entity
-@Table(name = "tb02_pressure")
+@Table(name = "tb05_medication")
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class Pressure {
+public class Medication {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "tb02_id")
+    @Column(name = "tb05_id")
     private Long id;
 
-    @Column(name = "tb02_diastolic")
-    private String diastolic;
+    @Column(name = "tb05_name")
+    private String name;
 
-    @Column(name = "tb02_systolic")
-    private String systolic;
+    @Column(name = "tb05_dosage")
+    private String dosage;
 
-    @Column(name = "tb02_pulse")
-    private String pulse;
-
-    @Column(name = "tb02_date")
+    @Column(name = "tb05_date_medication")
     @Temporal(TemporalType.TIMESTAMP)
-    private Date date;
+    private Date dateMedication;
 
     @ManyToOne
-    @JoinColumn(name = "tb02_user_id")
+    @JoinColumn(name = "tb05_user_id")
     private User user;
 }

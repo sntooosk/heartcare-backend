@@ -2,10 +2,10 @@ package com.etec.backend.services.impl;
 
 import com.etec.backend.entities.Auth;
 import com.etec.backend.entities.User;
-import com.etec.backend.entities.dtos.AuthResponseDTO;
-import com.etec.backend.entities.dtos.LoginRequestDTO;
-import com.etec.backend.entities.dtos.RegisterRequestDTO;
-import com.etec.backend.entities.dtos.ResponseDTO;
+import com.etec.backend.dtos.AuthResponseDTO;
+import com.etec.backend.dtos.LoginRequestDTO;
+import com.etec.backend.dtos.RegisterRequestDTO;
+import com.etec.backend.dtos.ResponseDTO;
 import com.etec.backend.infra.security.TokenService;
 import com.etec.backend.repositories.AuthRepository;
 import com.etec.backend.repositories.UserRepository;

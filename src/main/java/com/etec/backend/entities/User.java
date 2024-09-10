@@ -30,7 +30,7 @@ public class User {
     @Column(name = "tb00_gender")
     private String gender;
 
-    @Column(name = "tb00_photo")
+    @Column(name = "tb00a_photo")
     private String photo;
 
     @OneToOne

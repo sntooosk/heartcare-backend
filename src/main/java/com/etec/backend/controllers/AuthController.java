@@ -1,7 +1,7 @@
 package com.etec.backend.controllers;
 
-import com.etec.backend.entities.dtos.LoginRequestDTO;
-import com.etec.backend.entities.dtos.RegisterRequestDTO;
+import com.etec.backend.dtos.LoginRequestDTO;
+import com.etec.backend.dtos.RegisterRequestDTO;
 import com.etec.backend.services.AuthService;
 
 import lombok.RequiredArgsConstructor;

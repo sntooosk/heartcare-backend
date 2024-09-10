@@ -1,9 +1,9 @@
 package com.etec.backend.services.impl;
 
 import com.etec.backend.entities.Pressure;
-import com.etec.backend.entities.dtos.PressureConcatResponseDTO;
-import com.etec.backend.entities.dtos.PressureResponseDTO;
-import com.etec.backend.entities.dtos.ResponseDTO;
+import com.etec.backend.dtos.PressureConcatResponseDTO;
+import com.etec.backend.dtos.PressureResponseDTO;
+import com.etec.backend.dtos.ResponseDTO;
 import com.etec.backend.repositories.PressureRepository;
 import com.etec.backend.services.PressureService;
 

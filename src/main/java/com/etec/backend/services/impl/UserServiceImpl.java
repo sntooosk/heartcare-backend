@@ -1,8 +1,8 @@
 package com.etec.backend.services.impl;
 
 import com.etec.backend.entities.User;
-import com.etec.backend.entities.dtos.ResponseDTO;
-import com.etec.backend.entities.dtos.UserResponseDTO;
+import com.etec.backend.dtos.ResponseDTO;
+import com.etec.backend.dtos.UserResponseDTO;
 import com.etec.backend.repositories.UserRepository;
 import com.etec.backend.services.UserService;
 

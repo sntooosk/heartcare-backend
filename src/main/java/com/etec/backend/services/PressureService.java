@@ -1,8 +1,8 @@
 package com.etec.backend.services;
 
 import com.etec.backend.entities.Pressure;
-import com.etec.backend.entities.dtos.PressureConcatResponseDTO;
-import com.etec.backend.entities.dtos.PressureResponseDTO;
+import com.etec.backend.dtos.PressureConcatResponseDTO;
+import com.etec.backend.dtos.PressureResponseDTO;
 
 import java.util.List;
 

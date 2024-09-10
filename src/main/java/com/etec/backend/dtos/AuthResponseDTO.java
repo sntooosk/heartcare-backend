@@ -1,4 +1,4 @@
-package com.etec.backend.entities.dtos;
+package com.etec.backend.dtos;
 
 import com.etec.backend.entities.AuthRole;
 

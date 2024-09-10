@@ -27,6 +27,7 @@ public class Post {
     private String comment;
 
     @Column(name = "tb03_date")
+    @Temporal(TemporalType.TIMESTAMP)
     private Date date;
 
 }

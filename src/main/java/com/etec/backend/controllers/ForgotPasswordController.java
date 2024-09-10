@@ -2,9 +2,9 @@ package com.etec.backend.controllers;
 
 import com.etec.backend.entities.Auth;
 import com.etec.backend.entities.ForgotPassword;
-import com.etec.backend.entities.dtos.ChangePasswordRequestDTO;
-import com.etec.backend.entities.dtos.EmailRequestDTO;
-import com.etec.backend.entities.dtos.ResponseDTO;
+import com.etec.backend.dtos.ChangePasswordRequestDTO;
+import com.etec.backend.dtos.EmailRequestDTO;
+import com.etec.backend.dtos.ResponseDTO;
 import com.etec.backend.repositories.AuthRepository;
 import com.etec.backend.repositories.ForgotPasswordRepository;
 import com.etec.backend.utils.EmailService;

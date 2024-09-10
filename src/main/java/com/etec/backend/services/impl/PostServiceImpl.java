@@ -1,7 +1,7 @@
 package com.etec.backend.services.impl;
 
 import com.etec.backend.entities.Post;
-import com.etec.backend.entities.dtos.ResponseDTO;
+import com.etec.backend.dtos.ResponseDTO;
 import com.etec.backend.repositories.PostRepository;
 import com.etec.backend.services.PostService;
 

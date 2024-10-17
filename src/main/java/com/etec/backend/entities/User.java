@@ -13,8 +13,8 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 public class User {
+
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "tb00_id")
     private Long id;
 

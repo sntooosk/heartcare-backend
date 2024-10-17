@@ -33,8 +33,7 @@ public class AuthServiceImpl implements AuthService {
             Auth auth = authOptional.get();
             if (passwordEncoder.matches(body.password(), auth.getPassword())) {
                 String token = tokenService.generateToken(auth);
-                return new AuthResponseDTO(auth.getId(), auth.getUser().getName(), auth.getEmail(), token,
-                        auth.getRole());
+                return new AuthResponseDTO(auth.getId(), auth.getUser().getName(), auth.getEmail(), token, auth.getRole());
             } else {
                 return new ResponseDTO("ERROR", "Senha incorreta.");
             }
@@ -49,17 +48,23 @@ public class AuthServiceImpl implements AuthService {
             return new ResponseDTO("ERROR", "E-mail já em uso.");
         }
 
+        // Criação de Auth
         Auth newAuth = new Auth();
         newAuth.setEmail(body.email());
         newAuth.setPassword(passwordEncoder.encode(body.password()));
         newAuth.setRole(body.role());
-        String token = tokenService.generateToken(newAuth);
         authRepository.save(newAuth);
 
+        // Criação de User com o mesmo ID de Auth
         User newUser = new User();
+        newUser.setId(newAuth.getId()); // Garantindo que o mesmo ID de Auth seja atribuído ao User
         newUser.setName(body.name());
-        newUser.setAuth(newAuth);
+        newUser.setAuth(newAuth); // Estabelecendo a relação com Auth
         userRepository.save(newUser);
+
+        // Gerando token após o registro
+        String token = tokenService.generateToken(newAuth);
+
         return new AuthResponseDTO(newAuth.getId(), newUser.getName(), newAuth.getEmail(), token, newAuth.getRole());
     }
 }
